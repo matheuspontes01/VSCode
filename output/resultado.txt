@@ -1,0 +1,2 @@
+Resultado (indice): 5674
+Tempo de execucao: 0.000000 segundos
