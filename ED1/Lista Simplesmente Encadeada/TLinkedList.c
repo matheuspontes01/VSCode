@@ -130,3 +130,40 @@ void TLinkedList_deleteAll(TLinkedList* list) {
     list->inicio = NULL;
     printf("Lista apagada com sucesso.\n");
 }
+
+bool TLinkedList_delete_from_begin(TLinkedList* lista, int* info){
+    if(lista->inicio == NULL) return false;
+
+    *info = lista->inicio->info;
+    TNo* temp = lista->inicio;
+    lista->inicio = lista->inicio->prox;
+    free(temp);
+    return true;
+}
+
+bool TLinkedList_delete_info(TLinkedList* lista, int info){
+    if(lista->inicio == NULL) return false;
+    TNo* search = TLinkedList_search(lista, info);
+    if(search==NULL) return false;
+    if(search == lista->inicio){
+        lista->inicio = lista->inicio->prox;
+    }else{
+        TNo* y = lista->inicio;
+        while(y->prox != search){
+            y = y->prox;
+        }
+        y->prox = search->prox;
+    }
+    free(search);
+    return true;
+}
+
+TNo* TLinkedList_search(TLinkedList* lista, int info){
+    TNo* aux = lista->inicio;
+    while(aux!=NULL){
+        if(aux->info == info)
+            break;
+        aux=aux->prox;
+    }
+    return aux;
+}

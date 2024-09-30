@@ -7,5 +7,8 @@ int main(void)
     lista_insert_begin(lista, 3);
     lista_sorted(lista, 4);
     lista_print(lista);
+
+    TStaticList_deleteOneValue(lista, 5);
+    lista_print(lista);
     return 0;
 }
