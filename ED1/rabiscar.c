@@ -3,6 +3,7 @@
 
 int main()
 {
+    /*
     float *p1, *p2;
     p1 = (float*)malloc(sizeof(float));
     *p1 = 10;
@@ -17,4 +18,16 @@ int main()
     p2 = (float*)malloc(sizeof(float));
     *p2 = 20;
     return 0;
+    */
+
+   int a = 10; b = 20, *pa, *pb;
+   pa = &a;
+   pb = &b;
+   printf("Acessando o conteudo de *pa: %d\n", *pa);
+   printf("Acessando o conteudo de *pb: %d\n", *pb);
+   *pa = 500;
+   printf("Valor atual de a: %d\n", a);
+   b = *pa - b;
+   printf("Acessando o conteudo de *pb: %d\n", *pb);
+   printf("Endereco de b = %p e o valor do ponteiro: %p\n", &b, pb);
 }
