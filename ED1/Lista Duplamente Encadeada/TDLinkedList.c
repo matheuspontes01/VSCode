@@ -1,0 +1,98 @@
+#include "TDLinkedList.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _no{
+    int info;
+    struct _no *prox;
+    struct _no *ant;
+}TNo;
+
+struct _list {
+    TNo *inicio, *fim;
+};
+
+
+TDLinkedList* TDLinkedList_create() {
+    TDLinkedList* list = malloc(sizeof(TDLinkedList));
+    if (list != NULL) {
+        list->inicio = NULL;
+        list->fim = NULL;
+    }
+    return list;
+}
+
+TNo* TNo_createNFill(int info) {
+    TNo* novo = malloc(sizeof(TNo));
+    if (novo != NULL) {
+        novo->info = info;
+        novo->ant = NULL;
+        novo->prox = NULL;
+    }
+    return novo;
+}
+
+bool TDLinkedList_insert_end(TDLinkedList* list, int info) {
+    TNo* novo = TNo_createNFill(info);
+    if (novo == NULL) return false;
+    if (list->inicio == NULL) {
+        list->inicio = novo;
+        list->fim = novo;
+    } else {
+        list->fim->prox = novo;
+        novo->ant = list->fim;
+        list->fim = novo;
+    }
+    return true;
+}
+
+bool TDLinkedList_insert_begin(TDLinkedList* list, int info) {
+    TNo* novo = TNo_createNFill(info);
+    if (novo == NULL) return false;
+    if (list->inicio == NULL) {
+        list->inicio = novo;
+        list->fim = novo;
+    } else {
+        novo->prox = list->inicio;
+        list->inicio->ant = novo;
+        list->inicio = novo;
+    }
+    return true;
+}
+
+void TDLinkedList_print(TDLinkedList* list) {
+    printf("Print do inicio ao fim:\n");
+    TNo* aux = list->inicio;
+    while (aux != NULL) {
+        printf(" <- %d -> ", aux->info);
+        aux = aux->prox;
+    }
+    putchar('\n');
+}
+
+void TDLinkedList_reverse_print(TDLinkedList* list) {
+    printf("Print do fim ao inicio:\n");
+    TNo* aux = list->fim;
+    while (aux!= NULL) {
+        printf(" <- %d -> ", aux->info);
+        aux = aux->ant;
+    }
+    putchar('\n');
+}
+
+bool TDLinkedList_reverse_print(TDLinkedList* list, int info) {
+    TNo* novo = TNo_createNFill(info);
+    if (novo == NULL) return false;
+
+    if (list->inicio == NULL) {
+        list->inicio = novo;
+        list->fim = novo;
+    } else {
+        TNo* aux = list->inicio;
+        while (aux != NULL && aux->info < aux->prox->info) {
+            aux = aux->prox;
+            i++;
+        }
+        
+    }
+}
