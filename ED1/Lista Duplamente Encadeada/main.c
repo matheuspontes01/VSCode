@@ -1,10 +1,11 @@
 #include "TDLinkedList.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-int main(int argc, char *argv[])
+int main()
 {   
-    /* Descomente isso caso seja int main(int argc, char *argv[])
+    // Descomente isso caso seja int main(int argc, char *argv[])
+    /*
     if (argc < 2) {
         printf("Uso: %s 1 2 3 4\n", argv[0]);
         return 0;
@@ -16,22 +17,25 @@ int main(int argc, char *argv[])
     TDLinkedList_print(list);
     TDLinkedList_reverse_print(list);
     return 0;
-    
     */
+    
+    
 
-   /* Descomente isso caso seja int main(void)
+   // Descomente isso caso seja int main(void)
+   
     TDLinkedList *list = TDLinkedList_create();
-    int V[] = {1, 6, 19, 20};
+    int V[] = {5, 2, 6, 1};
 
     for (int i = 0; i < 4; i++) {
-        if (!TDLinkedList_insert_begin(list, V[i])){
+        if (!TDLinkedList_sorted(list, V[i])){
             printf("Problema ao inserir o valor: %d\n", V[i]);
         }
     }
 
     TDLinkedList_print(list);
-    TDLinkedList_reverse_print(list);
+
+    //TDLinkedList_reverse_print(list);
 
     return 0;
-    */
+    
 }

@@ -14,4 +14,6 @@ void TDLinkedList_print(TDLinkedList*);
 
 void TDLinkedList_reverse_print(TDLinkedList*);
 
+bool TDLinkedList_sorted(TDLinkedList*, int);
+
 #endif

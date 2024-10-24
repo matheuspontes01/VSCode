@@ -4,23 +4,12 @@
 
 typedef struct _no{
     int info;
-    struct _no *prox;
-    struct _no *ant;
+    struct _no *prox, *ant;
 }TNo;
 
 struct _list {
     TNo *inicio, *fim;
 };
-
-
-TDLinkedList* TDLinkedList_create() {
-    TDLinkedList* list = malloc(sizeof(TDLinkedList));
-    if (list != NULL) {
-        list->inicio = NULL;
-        list->fim = NULL;
-    }
-    return list;
-}
 
 TNo* TNo_createNFill(int info) {
     TNo* novo = malloc(sizeof(TNo));
@@ -30,6 +19,15 @@ TNo* TNo_createNFill(int info) {
         novo->prox = NULL;
     }
     return novo;
+}
+
+TDLinkedList* TDLinkedList_create() {
+    TDLinkedList* list = malloc(sizeof(TDLinkedList));
+    if (list != NULL) {
+        list->inicio = NULL;
+        list->fim = NULL;
+    }
+    return list;
 }
 
 bool TDLinkedList_insert_end(TDLinkedList* list, int info) {
@@ -64,7 +62,7 @@ void TDLinkedList_print(TDLinkedList* list) {
     printf("Print do inicio ao fim:\n");
     TNo* aux = list->inicio;
     while (aux != NULL) {
-        printf(" <- %d -> ", aux->info);
+        printf("<- %d -> ", aux->info);
         aux = aux->prox;
     }
     putchar('\n');
@@ -80,7 +78,7 @@ void TDLinkedList_reverse_print(TDLinkedList* list) {
     putchar('\n');
 }
 
-bool TDLinkedList_reverse_print(TDLinkedList* list, int info) {
+bool TDLinkedList_sorted(TDLinkedList* list, int info) {
     TNo* novo = TNo_createNFill(info);
     if (novo == NULL) return false;
 
@@ -89,10 +87,25 @@ bool TDLinkedList_reverse_print(TDLinkedList* list, int info) {
         list->fim = novo;
     } else {
         TNo* aux = list->inicio;
-        while (aux != NULL && aux->info < aux->prox->info) {
+
+        while (aux != NULL && novo->info > aux->info) {
             aux = aux->prox;
-            i++;
         }
-        
+
+        if (list->inicio == aux) {
+            novo->prox = list->inicio;
+            list->inicio->ant = novo;
+            list->inicio = novo;
+        } else if (aux == NULL){
+            novo->ant = list->fim;
+            list->fim->prox = novo;
+            list->fim = novo;
+        } else {
+            novo->ant = aux->ant;
+            aux->ant->prox = novo;
+            novo->prox = aux;
+            aux->ant = novo;
+        }
     }
+    return true;
 }
