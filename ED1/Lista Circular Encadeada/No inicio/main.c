@@ -3,7 +3,7 @@
 
 int main() {
     TCircularList *list = TCircularList_Create();
-
+    /*
     int N, M;
     printf("Entrada: ");
     scanf("%d %d", &N, &M);
@@ -19,4 +19,15 @@ int main() {
     TCircularList_sorted(list, M);
 
     TCircularList_print_Resposta(list);
+    */
+
+    int V[] = {4, 2, 7, 1};
+
+    for (int i = 0; i < 4; i++) {
+        if (!TCircularList_sorted(list, V[i])) {
+            printf("Erro ao inserir o valor: %d\n", V[i]);
+        }
+    }
+
+    TCircularList_print(list);
 }

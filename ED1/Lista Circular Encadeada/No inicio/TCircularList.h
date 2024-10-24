@@ -12,6 +12,8 @@ bool TCircularList_insert_end(TCircularList*, int);
 
 void TCircularList_print(TCircularList*);
 
+bool TCircularList_Resposta(TCircularList*, int);
+
 bool TCircularList_sorted(TCircularList*, int);
 
 void TCircularList_print_Resposta(TCircularList*);
