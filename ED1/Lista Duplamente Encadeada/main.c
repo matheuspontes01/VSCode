@@ -36,6 +36,18 @@ int main()
 
     //TDLinkedList_reverse_print(list);
 
+    TDLinkedList_delete_oneValue(list, 2);
+    printf("Lista apos remover o 5 da lista\n");
+    TDLinkedList_print(list);
+
+    TDLinkedList_delete_oneValue(list, 6);
+    printf("Lista apos remover o 6 da lista\n");
+    TDLinkedList_print(list);
+
+
+    TDLinkedList_deleteList(list);
+    printf("Lista removida\n");
+    TDLinkedList_print(list);
     return 0;
     
 }

@@ -109,3 +109,49 @@ bool TDLinkedList_sorted(TDLinkedList* list, int info) {
     }
     return true;
 }
+
+bool TDLinkedList_delete_oneValue(TDLinkedList* list, int info) {
+    if (list->inicio == NULL) {
+        return false;
+    }
+
+    TNo* aux = list->inicio;
+
+    while (aux != NULL && aux->info != info) {
+        aux = aux->prox;
+    }
+    if (aux == list->inicio) {
+        list->inicio = aux->prox;
+        list->inicio->ant = NULL;
+        free(aux);
+    } else if (aux == list->fim) {
+        list->fim = aux->ant;
+        list->fim->prox = NULL;
+        free(aux);
+    } else {
+        aux->ant->prox = aux->prox;
+        aux->prox->ant = aux->ant;
+        free(aux);
+    }
+
+    return true;
+}
+
+bool TDLinkedList_deleteList(TDLinkedList* list) {
+    if (list->inicio == NULL) {
+        return false;
+    }
+
+    TNo* aux = list->inicio;
+    TNo* temp;
+    
+    while (aux != NULL) {
+        temp = aux->prox;
+        free(aux);
+        aux = temp;
+    }
+
+    list->inicio = NULL;
+
+    return true;
+}

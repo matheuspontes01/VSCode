@@ -102,7 +102,6 @@ void TCircularList_print(TCircularList *list)
 
 bool TCircularList_Resposta(TCircularList *list, int M)
 {
-    /*
     if (list->inicio == NULL) {
         return false;
     }
@@ -125,7 +124,6 @@ bool TCircularList_Resposta(TCircularList *list, int M)
 
     list->inicio = atual;
     return true;
-    */
 }
 
 bool TCircularList_sorted(TCircularList *list, int info)
