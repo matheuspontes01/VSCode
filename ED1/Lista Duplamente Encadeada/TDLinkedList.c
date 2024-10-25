@@ -145,10 +145,10 @@ bool TDLinkedList_deleteList(TDLinkedList* list) {
     TNo* aux = list->inicio;
     TNo* temp;
     
-    while (aux != NULL) {
-        temp = aux->prox;
-        free(aux);
-        aux = temp;
+    while (aux != NULL) { // prestar atencao nesse detalhe, fiz errado na ultima vez, coloquei aux = aux->prox e depois atribuia pro temp e liberava temp (da erro)
+        temp = aux->prox; // armazena o endereco do proximo no em temp
+        free(aux); // libera o no atual
+        aux = temp; // o no atual recebera o endereco do no proximo dele
     }
 
     list->inicio = NULL;
