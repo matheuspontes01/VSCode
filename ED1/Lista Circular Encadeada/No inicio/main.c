@@ -30,4 +30,31 @@ int main() {
     }
 
     TCircularList_print(list);
+
+    printf("Quantidade de elementos: %d\n", TCircularList_contar_elementos(list));
+
+    TCircularList_insert_no_inicio(list, 10);
+
+    TCircularList_print(list);
+
+    TCircularList *list2 = TCircularList_Create();
+
+    int R[] = {14, 13, 18};
+
+    for (int i = 0; i < 3; i++) {
+        if (!TCircularList_sorted(list2, R[i])) {
+            printf("Erro ao inserir o valor: %d\n", R[i]);
+        }
+    }
+
+    TCircularList_print(list2);
+
+    TCircularList* list3 = TCircularList_concatenar(list, list2);
+
+    TCircularList_print(list3);
+
+    printf("Lista intercalada: \n");
+    TCircularList* list4 = TCircularList_intercalar(list, list2);
+
+    TCircularList_print(list4);
 }

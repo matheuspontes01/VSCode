@@ -22,4 +22,12 @@ bool TCircularList_delete(TCircularList*, int);
 
 void TCircularList_deleteList(TCircularList*);
 
+int TCircularList_contar_elementos(TCircularList*);
+
+bool TCircularList_insert_no_inicio(TCircularList*, int);
+
+TCircularList* TCircularList_concatenar(TCircularList*, TCircularList*);
+
+TCircularList* TCircularList_intercalar(TCircularList*, TCircularList*);
+
 #endif //TCIRCULARLIST_H
