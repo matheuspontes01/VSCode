@@ -100,7 +100,7 @@ bool TDLinkedList_sorted(TDLinkedList* list, int info) {
             novo->ant = list->fim;
             list->fim->prox = novo;
             list->fim = novo;
-        } else { // verificar se aux esta no intermediario da lista
+        } else { // verificar se aux esta no meio/intermediario da lista
             novo->ant = aux->ant;
             aux->ant->prox = novo;
             novo->prox = aux;

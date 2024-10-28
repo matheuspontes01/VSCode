@@ -39,7 +39,7 @@ int main() {
 
     TCircularList *list2 = TCircularList_Create();
 
-    int R[] = {14, 13, 18};
+    int R[] = {7, 2, 18};
 
     for (int i = 0; i < 3; i++) {
         if (!TCircularList_sorted(list2, R[i])) {
@@ -49,12 +49,24 @@ int main() {
 
     TCircularList_print(list2);
 
-    TCircularList* list3 = TCircularList_concatenar(list, list2);
+    //TCircularList* list3 = TCircularList_concatenar(list, list2);
+    //printf("Lista concatenada: \n");
+    //TCircularList_print(list3);
 
-    TCircularList_print(list3);
+    printf("Lista 1: \n");
+    TCircularList_print(list);
+
+    printf("Lista 2: \n");
+    TCircularList_print(list2);
 
     printf("Lista intercalada: \n");
-    TCircularList* list4 = TCircularList_intercalar(list, list2);
+    //TCircularList* list4 = TCircularList_intercalar(list, list2);
 
-    TCircularList_print(list4);
+    //TCircularList_print(list4);
+
+    printf("Intersecao da lista 1 e 2: \n");
+    TCircularList* list5 = TCircularList_intersecao(list, list2);
+
+    TCircularList_print(list5);
+    
 }

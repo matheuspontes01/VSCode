@@ -203,7 +203,7 @@ bool TCircularList_delete(TCircularList *list, int info)
         }
         TNo *fim = aux;
 
-        if (list->inicio == list->inicio->prox)
+        if (list->inicio == list->inicio->prox) // se tiver um elemento na lista so, ou seja, um no apontando para si mesmo
         {
             free(list->inicio);
             list->inicio = NULL;
@@ -235,24 +235,22 @@ bool TCircularList_delete(TCircularList *list, int info)
     return false;
 }
 
-void TCircularList_deleteList(TCircularList *list)
+bool TCircularList_deleteList(TCircularList *list) // ok (errei por um igual a mais no list->inicio = NULL)
 {
-    if (list->inicio == NULL)
-    {
-        return;
-    }
+    if (list->inicio == NULL) return false;
 
-    TNo *aux = list->inicio;
-    TNo *temp;
+    TNo* aux = list->inicio;
+    TNo* temp;
 
-    do
-    {
+    do {
         temp = aux->prox;
         free(aux);
         aux = temp;
     } while (aux != list->inicio);
 
     list->inicio = NULL;
+
+    return true;
 }
 
 int TCircularList_contar_elementos(TCircularList *list)
@@ -277,7 +275,7 @@ int TCircularList_contar_elementos(TCircularList *list)
     }
 }
 
-bool TCircularList_insert_no_inicio(TCircularList *list, int info)
+bool TCircularList_insert_no_inicio(TCircularList *list, int info) // ok
 {
     TNo *novo = TNo_createNFill(info);
 
@@ -300,7 +298,7 @@ bool TCircularList_insert_no_inicio(TCircularList *list, int info)
     return true;
 }
 
-TCircularList* TCircularList_concatenar(TCircularList* list1, TCircularList* list2)
+TCircularList* TCircularList_concatenar(TCircularList* list1, TCircularList* list2) // ok
 {
     if (list1->inicio == NULL || list2->inicio == NULL) return NULL;
 
@@ -332,26 +330,69 @@ TCircularList* TCircularList_concatenar(TCircularList* list1, TCircularList* lis
     return list3;
 }
 
-TCircularList* TCircularList_intercalar(TCircularList* list1, TCircularList* list2) {
-    if (list1->inicio == NULL) return list2;
-    if (list2->inicio == NULL) return list1;
+TCircularList* TCircularList_intercalar(TCircularList* list1, TCircularList* list2) { //ok
 
     TCircularList* list3 = TCircularList_Create();
+
+    if (list3 == NULL) return NULL;
 
     TNo* aux1 = list1->inicio;
     TNo* aux2 = list2->inicio;
 
+    bool intercalando = true;
     do {
-        if (aux1->info <= aux2->info) {
-            TCircularList_sorted(list3, aux1->info);
-            aux1 = aux1->prox;
-            if (aux1 == list1->inicio) aux1 = NULL;
-        } else {
-            TCircularList_sorted(list3, aux2->info);
-            aux2 = aux2->prox;
-            if (aux2 == list2->inicio) aux2 = NULL;
+        if (aux1 && intercalando) {
+            TCircularList_insert_end(list3, aux1->info);
+            if (aux1->prox == list1->inicio) {
+                aux1 = NULL;
+            } else {
+                aux1 = aux1->prox;
+            }
         }
+        if (aux2 && !intercalando) {
+            TCircularList_insert_end(list3, aux2->info);
+            if (aux2->prox == list2->inicio) {
+                aux2 = NULL;
+            } else {
+                aux2 = aux2->prox;
+            }
+        }
+        intercalando = !intercalando;
     } while (aux1 != NULL || aux2 != NULL);
+
+    return list3;
+}
+
+
+bool TCircularList_info_igual(TCircularList* list, int info) { // verificar se essa info esta presente na lista 
+    if (list->inicio == NULL) return false; // lista vazia
+    
+    TNo* aux = list->inicio;
+    do {
+        if (aux->info == info) return true; // valor encontrado
+        aux = aux->prox;
+    } while (aux != list->inicio);
+    
+    return false; // valor nao encontrado
+}
+
+TCircularList* TCircularList_intersecao(TCircularList* list1, TCircularList* list2) { // ok
+   TCircularList* list3 = TCircularList_Create();
+    if (list1->inicio == NULL || list2->inicio == NULL) return list3;
+
+    TNo* aux1 = list1->inicio;
+    do { // cada elemento de list1 esta sendo comparado com todos os elementos de list2**
+        TNo* aux2 = list2->inicio;
+        do {
+            if (aux1->info == aux2->info && !TCircularList_info_igual(list3, aux1->info)) {
+                TCircularList_insert_end(list3, aux1->info);
+                break; // uma vez que voce encontra um valor que esta presente em ambas as listas, nao ha necessidade de comparar outros elementos de list2 para o mesmo aux1->info
+                // evita comparacoes desnecessarias
+            }
+            aux2 = aux2->prox;
+        } while (aux2 != list2->inicio);
+        aux1 = aux1->prox;
+    } while (aux1 != list1->inicio);
 
     return list3;
 }
