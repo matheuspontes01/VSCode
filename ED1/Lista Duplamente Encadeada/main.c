@@ -5,6 +5,7 @@
 int main()
 {   
     // Descomente isso caso seja int main(int argc, char *argv[])
+    // Obs: insere os numeros apos ./a.exe para rodar o programa
     /*
     if (argc < 2) {
         printf("Uso: %s 1 2 3 4\n", argv[0]);
@@ -20,7 +21,8 @@ int main()
     */
     
     
-
+    
+    
    // Descomente isso caso seja int main(void)
    
     TDLinkedList *list = TDLinkedList_create();
