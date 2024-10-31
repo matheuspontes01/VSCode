@@ -7,7 +7,7 @@ int main(void) {
 
     int alumnis, jantares;
     while (1) {
-        printf("Numero de alumnis e numero de jantares: \n");
+        //printf("Numero de alumnis e numero de jantares: \n");
         scanf("%d %d", &alumnis, &jantares);
 
         if (alumnis == 0 && jantares == 0) {
@@ -21,7 +21,7 @@ int main(void) {
         }
 
         for (int j = 0; j < jantares; j++) {
-            printf("Digite os participantes do jantar %d: \n", j + 1);
+            //printf("Digite os participantes do jantar %d: \n", j + 1);
             for (int i = 0; i < alumnis; i++) {
                 scanf("%d", &A[j][i]);
             }

@@ -56,7 +56,7 @@ bool TLinkedList_insert_end(TLinkedList* list, int info){
     }
     return true;
 }
-
+/*
 bool TLinkedList_insert_middle(TLinkedList* list, int info) { // Assumiremos que a ordem da lista é crescente
     TNo* novo = TNo_createNFill(info);
     if (novo == NULL) return false;
@@ -141,6 +141,7 @@ bool TLinkedList_delete_from_begin(TLinkedList* lista, int* info){
     return true;
 }
 
+
 bool TLinkedList_delete_info(TLinkedList* lista, int info){
     if(lista->inicio == NULL) return false;
     TNo* search = TLinkedList_search(lista, info);
@@ -157,7 +158,9 @@ bool TLinkedList_delete_info(TLinkedList* lista, int info){
     free(search);
     return true;
 }
+*/
 
+/*
 TNo* TLinkedList_search(TLinkedList* lista, int info){
     TNo* aux = lista->inicio;
     while(aux!=NULL){
@@ -167,3 +170,107 @@ TNo* TLinkedList_search(TLinkedList* lista, int info){
     }
     return aux;
 }
+*/
+bool TLinkedList_deleteOneValue(TLinkedList* list, int info) {
+    if (list->inicio == NULL) return false;
+
+    TNo* aux = list->inicio;
+    TNo* anterior;
+    while (aux != NULL && aux->info != info) {
+        anterior = aux;
+        aux = aux->prox;
+    } 
+    if (aux == list->inicio) {
+        aux->prox = NULL;
+        free(aux);
+    } else if (aux == NULL) {
+        printf("Nao existe esse valor\n");
+    } else {
+        anterior->prox = aux->prox;
+        free(aux);
+    }
+    return true;
+}
+
+bool TLinkedList_deleteList(TLinkedList* list) {
+    if (list->inicio == NULL) return false;
+
+    TNo* aux = list->inicio;
+    TNo* anterior;
+    while (aux != NULL) {
+        anterior = aux->prox;
+        free(aux);
+        aux = anterior;
+    }
+    return true;
+}
+
+TLinkedList* TLinkedList_intercalar(TLinkedList* list1, TLinkedList* list2) {
+    TLinkedList* list3 = TLinkedList_create();
+
+    if (list1->inicio == NULL || list2->inicio == NULL) return list3;
+
+    TNo* aux1 = list1->inicio;
+    TNo* aux2 = list2->inicio;
+    bool intercalando = true;
+    do {
+        if (aux1 != NULL && intercalando) {
+            TLinkedList_insert_end(list3, aux1->info);
+            aux1 = aux1->prox;
+        }
+        if (aux2 != NULL && !intercalando) {
+            TLinkedList_insert_end(list3, aux2->info);
+            aux2 = aux2->prox;
+        }
+        intercalando = !intercalando;
+    } while (aux1 != NULL || aux2 != NULL);
+
+    return list3;
+} 
+
+bool TLinkedList_sorted(TLinkedList* list, int info) {
+    TNo* novo = TNo_createNFill(info);
+    if (list->inicio == NULL) {
+        list->inicio = novo;
+    } else {
+        TNo* aux = list->inicio;
+        TNo* anterior;
+        while (aux != NULL && novo->info > aux->info) {
+            anterior = aux;
+            aux = aux->prox;
+        }
+        if (aux == list->inicio) {
+            novo->prox = list->inicio;
+            list->inicio = novo;
+        } else if (aux == NULL) {
+            anterior->prox = novo;
+        } else {
+            anterior->prox = novo;
+            novo->prox = aux;
+        }
+    }
+    return true;
+}
+
+TLinkedList* TLinkedList_intercalar_ordenadamente(TLinkedList* list1, TLinkedList* list2) {
+    TLinkedList* list3 = TLinkedList_create();
+
+    if (list1->inicio == NULL || list2->inicio == NULL) return list3;
+
+    TNo* aux1 = list1->inicio;
+    TNo* aux2 = list2->inicio;
+    bool intercalando = true;
+    do {
+        if (aux1 != NULL && intercalando) {
+            TLinkedList_sorted(list3, aux1->info);
+            aux1 = aux1->prox;
+        }
+        if (aux2 != NULL && !intercalando) {
+            TLinkedList_sorted(list3, aux2->info);
+            aux2 = aux2->prox;
+        }
+        intercalando = !intercalando;
+    } while (aux1 != NULL || aux2 != NULL);
+
+    return list3;
+} 
