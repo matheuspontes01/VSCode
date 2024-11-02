@@ -24,4 +24,12 @@ bool TLinkedList_sorted(TLinkedList*, int);
 
 TLinkedList* TLinkedList_intercalar_ordenadamente(TLinkedList*, TLinkedList*);
 
+TLinkedList* TLinkedList_retornar_impares(TLinkedList*, TLinkedList*);
+
+TLinkedList* TLinkedList_retornar_pares(TLinkedList*, TLinkedList*);
+
+bool TLinkedList_info_igual(TLinkedList*, int);
+
+TLinkedList* TLinkedList_intersecao(TLinkedList*, TLinkedList*);
+
 #endif

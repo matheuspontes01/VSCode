@@ -20,4 +20,8 @@ bool TDLinkedList_delete_oneValue(TDLinkedList*, int);
 
 bool TDLinkedList_deleteList(TDLinkedList*);
 
+TDLinkedList* TDLinkedList_intercalar(TDLinkedList*, TDLinkedList*);
+
+TDLinkedList* TDLinkedList_intercalar_ordenado(TDLinkedList*, TDLinkedList*);
+
 #endif

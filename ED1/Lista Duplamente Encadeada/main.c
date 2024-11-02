@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int main()
-{   
+int main() {   
     // Descomente isso caso seja int main(int argc, char *argv[])
     // Obs: insere os numeros apos ./a.exe para rodar o programa
     /*
@@ -38,18 +37,29 @@ int main()
 
     //TDLinkedList_reverse_print(list);
 
-    TDLinkedList_delete_oneValue(list, 2);
-    printf("Lista apos remover o 5 da lista\n");
-    TDLinkedList_print(list);
-
-    TDLinkedList_delete_oneValue(list, 6);
-    printf("Lista apos remover o 6 da lista\n");
-    TDLinkedList_print(list);
+    //TDLinkedList_delete_oneValue(list, 6);
+    //printf("Lista apos remover o 6 da lista\n");
+    //TDLinkedList_print(list);
 
 
-    TDLinkedList_deleteList(list);
-    printf("Lista removida\n");
-    TDLinkedList_print(list);
+    //TDLinkedList_deleteList(list);
+   // printf("Lista removida\n");
+    //TDLinkedList_print(list);
+    TDLinkedList* list2 = TDLinkedList_create();
+
+    int N[] = {16, 4, 10, 8};
+
+    for (int i = 0; i < 4; i++) {
+        if (!TDLinkedList_sorted(list2, N[i])){
+            printf("Problema ao inserir o valor: %d\n", N[i]);
+        }
+    }
+
+    TDLinkedList_print(list2);
+
+    TDLinkedList* list3 = TDLinkedList_intercalar_ordenado(list, list2);
+
+    TDLinkedList_print(list3);
+
     return 0;
-    
 }

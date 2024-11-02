@@ -274,3 +274,95 @@ TLinkedList* TLinkedList_intercalar_ordenadamente(TLinkedList* list1, TLinkedLis
 
     return list3;
 } 
+
+TLinkedList* TLinkedList_retornar_impares(TLinkedList* list, TLinkedList* list2) {
+    TLinkedList* list3 = TLinkedList_create();
+
+    if (list->inicio == NULL || list2->inicio == NULL) return list3;
+
+    TNo* aux1 = list->inicio;
+    TNo* aux2 = list2->inicio;
+    bool intercalando = true;
+
+    do {
+        if (aux1 != NULL && intercalando) {
+            if (aux1->info % 2 != 0) {
+                TLinkedList_insert_end(list3, aux1->info);
+            }
+            aux1 = aux1->prox;
+        }
+        if (aux2 != NULL && !intercalando) {
+            if (aux2->info % 2 != 0) {
+                TLinkedList_insert_end(list3, aux2->info);
+            }
+            aux2 = aux2->prox;
+        }
+        intercalando = !intercalando;
+    } while (aux1 != NULL || aux2 != NULL);
+
+    return list3;
+}
+
+TLinkedList* TLinkedList_retornar_pares(TLinkedList* list, TLinkedList* list2) {
+    TLinkedList* list3 = TLinkedList_create();
+
+    if (list->inicio == NULL || list2->inicio == NULL) return list3;
+
+    TNo* aux1 = list->inicio;
+    TNo* aux2 = list2->inicio;
+    bool intercalando = true;
+
+    do {
+        if (aux1 != NULL && intercalando) {
+            if (aux1->info % 2 == 0) {
+                TLinkedList_insert_end(list3, aux1->info);
+            }
+            aux1 = aux1->prox;
+        }
+        if (aux2 != NULL && !intercalando) {
+            if (aux2->info % 2 == 0) {
+                TLinkedList_insert_end(list3, aux2->info);
+            }
+            aux2 = aux2->prox;
+        }
+        intercalando = !intercalando;
+    } while (aux1 != NULL || aux2 != NULL);
+
+    return list3;
+}
+
+bool TLinkedList_info_igual(TLinkedList* list, int info) {
+    TNo* aux = list->inicio;
+    while (aux != NULL) {
+        if (aux->info == info){
+            return true;
+        }
+        aux = aux->prox;
+    }
+    return false;
+}
+
+TLinkedList* TLinkedList_intersecao(TLinkedList* list, TLinkedList* list2) {
+    TLinkedList* list3 = TLinkedList_create();
+
+    if (list->inicio == NULL || list2->inicio == NULL) return list3;
+
+    TNo* aux1 = list->inicio;
+    
+    while (aux1 != NULL){
+        TNo* aux2 = list2->inicio;
+        while (aux2 != NULL){
+            if (aux1->info == aux2->info) {
+                if (!TLinkedList_info_igual(list3, aux1->info))
+                {
+                    TLinkedList_insert_end(list3, aux1->info);
+                }
+                break;
+            }
+            aux2 = aux2->prox;
+        }
+        aux1 = aux1->prox;
+    }
+
+    return list3;
+}

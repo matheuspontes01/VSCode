@@ -155,3 +155,47 @@ bool TDLinkedList_deleteList(TDLinkedList* list) {
 
     return true;
 }
+
+TDLinkedList* TDLinkedList_intercalar(TDLinkedList* list, TDLinkedList* list2) {
+    TDLinkedList* list3 = TDLinkedList_create();
+
+    if (list->inicio == NULL || list2->inicio == NULL) return list3;
+
+    TNo* aux1 = list->inicio;
+    TNo* aux2 = list2->inicio;
+    bool intercalando = true;
+    do {
+        if (aux1 != NULL && intercalando) {
+            TDLinkedList_insert_end(list3, aux1->info);
+            aux1 = aux1->prox;
+        }
+        if (aux2 != NULL && !intercalando) {
+            TDLinkedList_insert_end(list3, aux2->info);
+            aux2 = aux2->prox;
+        }
+        intercalando = !intercalando;
+    } while (aux1 != NULL || aux2 != NULL);
+    return list3;
+}
+
+TDLinkedList* TDLinkedList_intercalar_ordenado(TDLinkedList* list, TDLinkedList* list2) {
+    TDLinkedList* list3 = TDLinkedList_create();
+
+    if (list->inicio == NULL || list2->inicio == NULL) return list3;
+
+    TNo* aux1 = list->inicio;
+    TNo* aux2 = list2->inicio;
+    bool intercalando = true;
+    do {
+        if (aux1 != NULL && intercalando) {
+            TDLinkedList_sorted(list3, aux1->info);
+            aux1 = aux1->prox;
+        }
+        if (aux2 != NULL && !intercalando) {
+            TDLinkedList_sorted(list3, aux2->info);
+            aux2 = aux2->prox;
+        }
+        intercalando = !intercalando;
+    } while (aux1 != NULL || aux2 != NULL);
+    return list3;
+}

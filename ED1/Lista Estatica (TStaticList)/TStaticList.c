@@ -135,3 +135,30 @@ bool TStaticList_deleteOneValue(TStaticList* list, int valor){
     list->qty--;
     return true;
 }
+
+bool TStaticList_info_igual(TStaticList* list, int info) {
+    for (int i = 0; i < list->qty; i++) {
+        if (list->data[i] == info) return true;
+    }
+    return false;
+}
+
+TStaticList* TStaticList_intersecao(TStaticList* list, TStaticList* list2) {
+    TStaticList* list3 = lista_create(list->qty + list2->qty);
+
+    if (TStaticList_is_empty(list)|| TStaticList_is_empty(list2)) return list3;
+
+    for (int i = 0; i < list->qty; i++) {
+        if (!TStaticList_info_igual) {
+            lista_insert_end(list3, list->data[i]);
+        }
+    }
+
+    for (int i = 0; i < list2->qty; i++) {
+        if (!TStaticList_info_igual) {
+            lista_insert_end(list3, list2->data[i]);
+        }
+    }
+
+    return list3;
+}

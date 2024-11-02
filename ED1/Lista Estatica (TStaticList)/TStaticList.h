@@ -26,5 +26,9 @@ bool lista_is_empty(TStaticList*);
 
 bool TStaticList_is_empty(TStaticList*);
 
+TStaticList* TStaticList_intersecao(TStaticList*, TStaticList*);
+
+bool TStaticList_info_igual(TStaticList*, int);
+
 #endif
 
