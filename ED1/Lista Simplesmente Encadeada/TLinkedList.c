@@ -366,3 +366,81 @@ TLinkedList* TLinkedList_intersecao(TLinkedList* list, TLinkedList* list2) {
 
     return list3;
 }
+
+bool TLinkedList_createLoop(TLinkedList* list, int altura) {
+    if (list->inicio == NULL) return false; 
+    if (altura != 0) {
+        TNo* pos = list->inicio;
+        while (pos->info != altura) {
+            pos = pos->prox;
+        }
+
+        TNo* fim = list->inicio;
+        while (fim->prox != NULL) {
+            fim = fim->prox;
+        }
+
+        fim->prox = pos;
+    }
+    return true;
+}
+
+
+int TLinkedList_hasLoop(TLinkedList* list) {
+    TNo* fast = list->inicio;
+    TNo* slow = list->inicio;
+
+    while (fast != NULL && fast->prox != NULL) {
+        slow = slow->prox;
+        fast = fast->prox->prox;
+
+        if (slow == fast)  {
+            TNo* start = list->inicio;
+            int position = 1;
+
+            while (start != slow) {
+                start = start->prox;
+                slow = slow->prox;
+                position++;
+            }
+
+            return position;
+        }
+    }
+
+    return 0;
+}
+
+
+/*
+int TLinkedList_hasLoop(TLinkedList* list) {
+    TNo* slow = list->inicio;      // Ponteiro que avança 1 nó por vez
+    TNo* fast = list->inicio;      // Ponteiro que avança 2 nós por vez
+    int position = 0;              // Posição para contar o início do ciclo
+
+    // Detecta o ciclo usando o algoritmo de Floyd
+    while (fast != NULL && fast->prox != NULL) {
+        slow = slow->prox;               // Avança um nó
+        fast = fast->prox->prox;         // Avança dois nós
+
+        if (slow == fast) {              // Detecta um ciclo
+            // Encontrado o ciclo; agora localiza o início do ciclo
+            TNo* start = list->inicio;
+            position = 1;  // Inicializamos a contagem da posição como 1
+
+            // Encontra o início do ciclo contando a posição
+            while (start != slow) {
+                start = start->prox;
+                slow = slow->prox;
+                position++;
+            }
+
+            return position;  // Retorna a posição do início do ciclo
+        }
+    }
+
+    // Se não encontrar ciclo, retorna 0
+    return 0;
+}
+
+*/

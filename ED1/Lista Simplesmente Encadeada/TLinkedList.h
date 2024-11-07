@@ -32,4 +32,8 @@ bool TLinkedList_info_igual(TLinkedList*, int);
 
 TLinkedList* TLinkedList_intersecao(TLinkedList*, TLinkedList*);
 
+int TLinkedList_hasLoop(TLinkedList*);
+
+bool TLinkedList_createLoop(TLinkedList*, int);
+
 #endif
