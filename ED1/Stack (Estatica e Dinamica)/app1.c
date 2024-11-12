@@ -29,6 +29,9 @@ int main(void) {
         }
     }
 
+    Stack_print(S1);
+    Stack_print(S2);
+
     int temp;
 
     for (int i = 0; i < 3; i++) {
@@ -44,6 +47,8 @@ int main(void) {
     while (Stack_pop(S2, &teste)) {
         printf("%d, ", teste);
     }
+
+
 
 
     return 0;

@@ -51,14 +51,14 @@ bool inserir_polinomio(TDLinkedList* list, int coeficiente, int expoente) { // o
             if (aux->expoente == novo->expoente) {
                 aux->coeficiente += novo->coeficiente;
 
-                if (aux->coeficiente == 0) {
-                    if (anterior != NULL) {
-                        anterior->prox = aux->prox;
+                if (aux->coeficiente == 0) { // se dps da soma, o coeficiente fica 0
+                    if (anterior != NULL) { 
+                        anterior->prox = aux->prox; // o anterior aponta para aux esta apontando para o prox
                     } else {
-                        list->inicio = aux->prox;
+                        list->inicio = aux->prox; // senao, inicio recebe o proximo no de aux
                     }
-                    if (aux->prox != NULL) {
-                        aux->prox->ant = anterior;
+                    if (aux->prox != NULL) { // caso aux nao esteja o final da lista
+                        aux->prox->ant = anterior; 
                     } else {
                         list->fim = anterior;
                     }

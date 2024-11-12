@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typdef struct _list {
+typedef struct _list {
     int MAX;
     int qty;
     int* data;

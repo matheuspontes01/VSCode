@@ -1,5 +1,6 @@
 #include "Stack.h"
 #include <stdlib.h>
+#include <stdio.h>
 #define MAX 10
 
 struct stack {
@@ -55,4 +56,13 @@ int Stack_empty(Stack* stack) {
 
 int Stack_qty(Stack* stack) {
     return stack->index+1;
+}
+
+void Stack_print(Stack* stack) {
+    if (!Stack_empty(stack)) {
+        for (int i = 0; i <= stack->index; i++) {
+            printf("%d, ", stack->data[i]);
+        }
+    }
+    putchar('\n');
 }

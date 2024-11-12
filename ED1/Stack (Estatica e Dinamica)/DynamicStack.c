@@ -89,6 +89,7 @@ void Stack_print(Stack* stack) { // feito por mim
     TNo* aux = stack->inicio;
     while (aux != NULL) {
         printf("%d, ", aux->info);
+        aux = aux->prox;
     }
     putchar('\n');
 }
