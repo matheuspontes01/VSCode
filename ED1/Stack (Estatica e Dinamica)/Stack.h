@@ -1,5 +1,6 @@
 #ifndef STACK_H
 #define STACK_H
+#include <stdbool.h>
 
 typedef struct stack Stack;
 
@@ -12,5 +13,7 @@ int Stack_full(Stack*); // verificar se a pilha esta cheia
 int Stack_empty(Stack*); // verificar se a pilha esta vazia
 int Stack_qty(Stack*); // quantidade de elementos na pilha
 void Stack_print(Stack*);
+bool Stack_element_equals(Stack*, int);
+int Stack_equals(Stack*, Stack*);
 
 #endif
