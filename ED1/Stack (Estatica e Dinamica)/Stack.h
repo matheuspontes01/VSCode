@@ -15,5 +15,8 @@ int Stack_qty(Stack*); // quantidade de elementos na pilha
 void Stack_print(Stack*);
 bool Stack_element_equals(Stack*, int);
 int Stack_equals(Stack*, Stack*);
+Stack* Stack_reversed_dynamic(Stack*); // para pilha dinamica
+void Stack_reversed(Stack*); // para pilha estatica
+Stack* Stack_transfer(Stack*);
 
 #endif

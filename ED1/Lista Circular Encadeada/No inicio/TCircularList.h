@@ -34,4 +34,8 @@ bool TCircularList_info_igual(TCircularList*, int);
 
 TCircularList* TCircularList_intersecao(TCircularList*, TCircularList*);
 
+float TCircularList_calcular_media(TCircularList*);
+
+bool TCircularList_insert_position(TCircularList*, int, char, int);
+
 #endif //TCIRCULARLIST_H

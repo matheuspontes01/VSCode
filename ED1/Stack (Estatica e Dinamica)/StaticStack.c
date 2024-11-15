@@ -1,6 +1,7 @@
 #include "Stack.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #define MAX 10
 
 struct stack {
@@ -65,4 +66,17 @@ void Stack_print(Stack* stack) {
         }
     }
     putchar('\n');
+}
+
+void Stack_reversed(Stack* stack) { // inverter as posicoes de numeros de uma pilha estatica
+    if (Stack_empty(stack)) return;
+    int aux;
+    for (int i = 0; i < stack->index; i++) {
+        aux = stack->data[stack->index];
+        for (int j = stack->index; j > i; j--) {
+            stack->data[j] = stack->data[j-1];
+        }
+        stack->data[i] = aux;
+    }
+    return;
 }

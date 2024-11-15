@@ -69,4 +69,15 @@ int main() {
 
     TCircularList_print(list5);
     
+    printf("Media dos elementos da lista 5: %.2f\n", TCircularList_calcular_media(list5));
+
+
+    int info_list, info_insert;
+    char direction;
+    printf("Numero da info que esta na lista || posicao com a info que esta na lista ('e' ou 'd')|| info que deseja inserir \n");
+    scanf("%d %c %d", &info_list, &direction, &info_insert);
+
+    TCircularList_insert_position(list5, info_list, direction, info_insert);
+
+    TCircularList_print(list5);
 }

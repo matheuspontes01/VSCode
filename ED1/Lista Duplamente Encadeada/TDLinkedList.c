@@ -199,3 +199,36 @@ TDLinkedList* TDLinkedList_intercalar_ordenado(TDLinkedList* list, TDLinkedList*
     } while (aux1 != NULL || aux2 != NULL);
     return list3;
 }
+
+float TDLinkedList_calcular_media(TDLinkedList* list) {
+    if (!list || list->inicio == NULL) return 0;
+
+    TNo* aux = list->inicio;
+    float media = 0;
+    int qty = 0;
+    while (aux != NULL) {
+        media += aux->info;
+        qty++;
+        aux = aux->prox;
+    }
+
+    media /= qty;
+
+    return media;
+}
+
+TDLinkedList* TDLinkedList_gerar_lista_impares(TDLinkedList* list) {
+    TDLinkedList* list2 = TDLinkedList_create();
+
+    if (!list2 || list->inicio == NULL) return NULL;
+
+    TNo* aux = list->inicio;
+    while (aux != NULL) {
+        if (aux->info % 2 != 0) {
+            TDLinkedList_insert_end(list2, aux->info);
+        }
+        aux = aux->prox;
+    }
+
+    return list2;
+}

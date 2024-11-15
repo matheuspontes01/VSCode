@@ -126,3 +126,27 @@ int Stack_equals(Stack* stack1, Stack* stack2) {
         return 0;
     }
 }
+
+Stack* Stack_reversed_dynamic(Stack* stack) {
+    Stack* P = stack_create();
+    if (!P || Stack_empty(stack)) return NULL;
+    
+    int item;
+    printf("Removendo elementos da pilha 1 e inserindo na pilha 2\n");
+    while (Stack_pop(stack, &item)) {
+        printf("%d\n", item);
+        Stack_push(P, item);
+    }
+    return P;
+}
+
+Stack* Stack_transfer(Stack* stack) {
+    Stack* P = stack_create();
+    if (!P || Stack_empty(stack)) return NULL;
+    int item;
+    while (Stack_pop(stack, &item)) {
+        Stack_push(P, item);
+    }
+
+    return P;
+}

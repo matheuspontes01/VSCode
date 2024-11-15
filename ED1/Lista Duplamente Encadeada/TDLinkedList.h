@@ -24,4 +24,8 @@ TDLinkedList* TDLinkedList_intercalar(TDLinkedList*, TDLinkedList*);
 
 TDLinkedList* TDLinkedList_intercalar_ordenado(TDLinkedList*, TDLinkedList*);
 
+float TDLinkedList_calcular_media(TDLinkedList*);
+
+TDLinkedList* TDLinkedList_gerar_lista_impares(TDLinkedList*);
+
 #endif

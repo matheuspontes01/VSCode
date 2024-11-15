@@ -61,5 +61,11 @@ int main() {
 
     TDLinkedList_print(list3);
 
+    printf("Media das infos na lista 3: %.2f\n", TDLinkedList_calcular_media(list3));
+
+    TDLinkedList* list4 = TDLinkedList_gerar_lista_impares(list3);
+
+    printf("Lista so com impares: \n");
+    TDLinkedList_print(list4);
     return 0;
 }

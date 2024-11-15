@@ -17,15 +17,11 @@ int main() {
         }
     }
     
-    Stack* stack2 = stack_create();
+    Stack_reversed(stack);
     int item;
-    printf("Removendo elementos da pilha 1 e inserindo na pilha 2\n");
-    while (Stack_pop(stack, &item)) {
-        printf("%d\n", item);
-        Stack_push(stack2, item);
-    }
     printf("Removendo elementos da pilha 2 com os elementos invertidos\n");
-    while(Stack_pop(stack2, &item)) {
+    while(Stack_pop(stack, &item)) {
         printf("%d\n", item);
     }
+    
 }

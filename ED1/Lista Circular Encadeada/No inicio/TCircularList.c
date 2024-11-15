@@ -149,7 +149,7 @@ bool TCircularList_sorted(TCircularList *list, int info)
         {
             while (aux->prox != list->inicio)
             {
-                aux = aux->prox;
+                aux = aux->prox; // achar o no fim
             }
             novo->prox = list->inicio;
             aux->prox = novo;
@@ -395,4 +395,70 @@ TCircularList* TCircularList_intersecao(TCircularList* list1, TCircularList* lis
     } while (aux1 != list1->inicio);
 
     return list3;
+}
+
+float TCircularList_calcular_media(TCircularList* list) {
+    if (!list || list->inicio == NULL) return 0;
+
+    TNo* aux = list->inicio;
+    float media = 0;
+    int qty = 0;
+
+    do {
+        media += aux->info;
+        qty++;
+        aux = aux->prox;
+    } while (aux != list->inicio);
+
+    media /= qty;
+
+    return media;
+}
+
+bool TCircularList_insert_position(TCircularList* list, int info_list, char direction, int info_insert) {
+    TNo* novo = TNo_createNFill(info_insert);
+    if (!novo) return false;
+
+    bool position_exist = false;
+
+    TNo* aux = list->inicio;
+    TNo* anterior;
+    do {
+        if (aux->info == info_list) {
+            position_exist = true;
+            break;
+        }
+        anterior = aux;
+        aux = aux->prox;
+    } while (aux != list->inicio);
+
+    TNo* fim = list->inicio;
+    while (fim->prox != list->inicio) {
+        fim = fim->prox;
+    }
+
+    if (position_exist) {
+        if (direction == 'e') { // precisamos ver se esta no inicio da lista tambem
+            if (aux == list->inicio) { // precisamos achar o final da lista para apontar no novo no
+                fim->prox = novo;
+                novo->prox = list->inicio;
+                list->inicio = novo;
+            } else {
+                anterior->prox = novo;
+                novo->prox = aux;
+            }
+        } else if (direction == 'd') { // precisamos verificar se esta no final da lista
+            if (aux == fim) { 
+                fim->prox = novo;
+                novo->prox = list->inicio;
+            } else {
+                novo->prox = aux->prox;
+                aux->prox = novo;
+            }
+        }
+    } else {
+        return false;
+    }
+
+    return true;
 }
