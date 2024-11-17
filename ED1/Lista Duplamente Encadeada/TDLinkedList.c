@@ -232,3 +232,40 @@ TDLinkedList* TDLinkedList_gerar_lista_impares(TDLinkedList* list) {
 
     return list2;
 }
+
+bool TDLinkedList_equals_list(TDLinkedList* list1, TDLinkedList* list2) { // ok
+    if (!list1->inicio || !list2->inicio) return false;
+
+    TNo* aux1 = list1->inicio;
+    TNo* aux2 = list2->inicio;
+
+    while (aux1 != NULL || aux2 != NULL) {
+        if (aux1->info != aux2->info) {
+            printf("As listas nao sao iguais.\n");
+            return false;
+        }
+        aux1 = aux1->prox;
+        aux2 = aux2->prox;
+    }
+
+    if (aux1 == NULL && aux2 == NULL) {
+        printf("As listas sao iguais.\n");
+        return true;
+    } else {
+        printf("As listas nao sao iguais.\n");
+        return false;
+    }
+}
+
+TDLinkedList* TDLinkedList_reverse_list(TDLinkedList* list) { // ok
+    TDLinkedList* list2 = TDLinkedList_create();
+    if (!list2 || !list->inicio) return NULL;
+
+    TNo* aux = list->inicio;
+    while (aux != NULL) {
+        TDLinkedList_insert_begin(list2, aux->info);
+        aux = aux->prox;
+    }
+
+    return list2;
+}

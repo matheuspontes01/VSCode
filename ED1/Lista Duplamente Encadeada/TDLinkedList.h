@@ -28,4 +28,8 @@ float TDLinkedList_calcular_media(TDLinkedList*);
 
 TDLinkedList* TDLinkedList_gerar_lista_impares(TDLinkedList*);
 
+bool TDLinkedList_equals_list(TDLinkedList*, TDLinkedList*);
+
+TDLinkedList* TDLinkedList_reverse_list(TDLinkedList*);
+
 #endif

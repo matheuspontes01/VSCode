@@ -38,4 +38,8 @@ float TCircularList_calcular_media(TCircularList*);
 
 bool TCircularList_insert_position(TCircularList*, int, char, int);
 
+bool TCircularList_equals_list(TCircularList*, TCircularList*);
+
+TCircularList* TCircularList_reverse_list(TCircularList*);
+
 #endif //TCIRCULARLIST_H

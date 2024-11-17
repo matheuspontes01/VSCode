@@ -80,3 +80,27 @@ void Stack_reversed(Stack* stack) { // inverter as posicoes de numeros de uma pi
     }
     return;
 }
+
+bool Stack_info_igual(Stack* stack, int info) {
+    for (int i = 0; i < stack->index+1; i++) {
+        if (stack->data[i] == info) {
+            return true;
+        }
+    }
+    return false;
+}
+
+Stack* Stack_intersecao(Stack* stack1, Stack* stack2) {
+    Stack* stack3 = stack_create();
+    if (!stack1 || !stack2 || !stack3) return NULL;
+    for (int i = 0; i < stack1->index+1; i++) {
+        for (int j = 0; j < stack2->index+1; j++) {
+            if (stack1->data[i] == stack2->data[j]) {
+                if (!Stack_info_igual(stack3, stack1->data[i])){
+                    Stack_push(stack3, stack1->data[i]);
+                }
+            }
+        }
+    }
+    return stack3;
+}

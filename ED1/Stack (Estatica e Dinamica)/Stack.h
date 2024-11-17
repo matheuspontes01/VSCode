@@ -18,5 +18,7 @@ int Stack_equals(Stack*, Stack*);
 Stack* Stack_reversed_dynamic(Stack*); // para pilha dinamica
 void Stack_reversed(Stack*); // para pilha estatica
 Stack* Stack_transfer(Stack*);
+bool Stack_info_igual(Stack*, int);
+Stack* Stack_intersecao(Stack*, Stack*);
 
 #endif

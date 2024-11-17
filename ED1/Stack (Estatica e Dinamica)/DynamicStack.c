@@ -150,3 +150,34 @@ Stack* Stack_transfer(Stack* stack) {
 
     return P;
 }
+
+bool Stack_info_igual(Stack* stack, int info) {
+    TNo* aux = stack->inicio;
+    while (aux != NULL) {
+        if (aux->info == info) {
+            return true;
+        }
+        aux = aux->prox;
+    }
+    return false;
+}
+
+Stack* Stack_intersecao(Stack* stack1, Stack* stack2) {
+    Stack* stack3 = stack_create();
+    if (!stack3 || !stack1->inicio || !stack2->inicio) return NULL;
+    TNo* aux1 = stack1->inicio;
+    TNo* i, j;
+    while (aux1 != NULL) {
+        TNo* aux2 = stack2->inicio;
+        while (aux2 != NULL){
+            if (aux1->info == aux2->info) {
+                if (!Stack_info_igual(stack3, aux1->info)) {
+                    Stack_push(stack3, aux1->info);
+                }
+            }
+            aux2 = aux2->prox;
+        }
+        aux1 = aux1->prox;
+    }
+    return stack3;
+}

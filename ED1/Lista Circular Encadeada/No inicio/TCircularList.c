@@ -34,7 +34,7 @@ TNo *TNo_createNFill(int info)
     return novo;
 }
 
-bool TCircularList_insert(TCircularList *list, int info)
+bool TCircularList_insert(TCircularList *list, int info) // begin
 { // inserir no inicio
     TNo *novo = TNo_createNFill(info);
     if (novo == NULL)
@@ -461,4 +461,42 @@ bool TCircularList_insert_position(TCircularList* list, int info_list, char dire
     }
 
     return true;
+}
+
+bool TCircularList_equals_list(TCircularList* list1, TCircularList* list2) { // ok
+    if (!list1->inicio || !list2->inicio) return false;
+
+    TNo* aux1 = list1->inicio;
+    TNo* aux2 = list2->inicio;
+
+    do {
+        if (aux1->info != aux2->info) {
+            printf("As listas nao sao iguais.\n");
+            return false;
+        }
+        aux1 = aux1->prox;
+        aux2 = aux2->prox;
+    } while (aux1 != list1->inicio || aux2 != list2->inicio);
+
+    if (aux1 == list1->inicio && aux2 == list2->inicio) {
+        printf("As listas sao iguais.\n");
+        return true;
+    } else {
+        printf("As listas nao sao iguais.\n");
+        return false;
+    }
+}
+
+TCircularList* TCircularList_reverse_list(TCircularList* list) {
+    TCircularList* list2 = TCircularList_Create();
+    if (!list2) return NULL;
+
+    TNo* aux = list->inicio;
+
+    do {
+        TCircularList_insert(list2, aux->info);
+        aux = aux->prox;
+    } while (aux != list->inicio);
+
+    return list2;
 }
