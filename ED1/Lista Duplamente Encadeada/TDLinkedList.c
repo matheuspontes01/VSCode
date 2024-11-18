@@ -269,3 +269,24 @@ TDLinkedList* TDLinkedList_reverse_list(TDLinkedList* list) { // ok
 
     return list2;
 }
+
+TDLinkedList* TDLinkedList_concatenar(TDLinkedList* list1, TDLinkedList* list2) {
+    TDLinkedList* list3 = TDLinkedList_create();
+    if (!list3 || !list1->inicio) return list2;
+    if (!list3 || !list2->inicio) return list3;
+
+    TNo* fim = list1->inicio;
+    while (fim != NULL) {
+        TDLinkedList_insert_end(list3, fim->info);
+        fim = fim->prox;
+    }
+    fim = list2->inicio;
+
+    while (fim != NULL) {
+        TDLinkedList_insert_end(list3, fim->info);
+        fim = fim->prox;
+    }
+
+    return list3;
+}
+

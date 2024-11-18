@@ -20,5 +20,6 @@ void Stack_reversed(Stack*); // para pilha estatica
 Stack* Stack_transfer(Stack*);
 bool Stack_info_igual(Stack*, int);
 Stack* Stack_intersecao(Stack*, Stack*);
+Stack* Stack_concatenar(Stack*, Stack*);
 
 #endif

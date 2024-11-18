@@ -32,4 +32,12 @@ bool TDLinkedList_equals_list(TDLinkedList*, TDLinkedList*);
 
 TDLinkedList* TDLinkedList_reverse_list(TDLinkedList*);
 
+bool TDLinkedList_ehDigito(char);
+
+TDLinkedList* TDLinkedList_ordem_caracteres(TDLinkedList*, TDLinkedList*, TDLinkedList*);
+
+bool TDLinkedList_sorted_decrescente(TDLinkedList*, int);
+
+TDLinkedList* TDLinkedList_concatenar(TDLinkedList* list1, TDLinkedList* list2);
+
 #endif

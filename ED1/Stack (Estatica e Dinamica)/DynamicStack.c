@@ -181,3 +181,19 @@ Stack* Stack_intersecao(Stack* stack1, Stack* stack2) {
     }
     return stack3;
 }
+
+Stack* Stack_concatenar(Stack* stack1, Stack* stack2) {
+    Stack* stack3 = stack_create();
+    if (!stack3 || !stack1->inicio || !stack2->inicio) return NULL;
+    TNo* aux = stack1->inicio;
+    while (aux != NULL) {
+        Stack_push(stack3, aux->info);
+        aux = aux->prox;
+    }
+    aux = stack2->inicio;
+    while (aux != NULL) {
+        Stack_push(stack3, aux->info);
+        aux = aux->prox;
+    }
+    return stack3;
+}

@@ -104,3 +104,21 @@ Stack* Stack_intersecao(Stack* stack1, Stack* stack2) {
     }
     return stack3;
 }
+
+Stack* Stack_concatenar(Stack* stack1, Stack* stack2) {
+    Stack* stack3 = stack_create();
+    if (!stack3 || !stack1->index == -1 || !stack2->index == -1) return NULL;
+
+    for (int i = 0; i < stack1->index+1; i++) {
+        if (!Stack_push(stack3, stack1->data[i])){
+            printf("Nao foi possivel inserir V[%d] = %d\n", i, stack1->data[i]);
+        }
+    }
+    for (int i = 0; i < stack2->index+1; i++) {
+        if (!Stack_push(stack3, stack2->data[i])){
+            printf("Nao foi possivel inserir V[%d] = %d\n", i, stack2->data[i]);
+        }
+    }
+
+    return stack3;
+}
