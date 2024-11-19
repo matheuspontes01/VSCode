@@ -197,3 +197,27 @@ Stack* Stack_concatenar(Stack* stack1, Stack* stack2) {
     }
     return stack3;
 }
+
+bool Stack_isRepeating(Stack* stack, int info) {
+    TNo* aux = stack->inicio;
+    while (aux != NULL) {
+        if (aux->info == info) {
+            return true;
+        }
+        aux = aux->prox;
+    }
+    return false;
+}
+
+int Stack_push_no_repeat(Stack* stack, int info) {
+    TNo* novo = TNo_createNFill(info);
+    if (!novo) return 0;
+    if (!Stack_isRepeating(stack, info)) {
+        novo->prox = stack->inicio;
+        stack->inicio = novo;
+        stack->qty++;
+    } else {
+        printf("Nao pode inserir numero repetido na pilha\n");
+    }
+    return 1;
+}

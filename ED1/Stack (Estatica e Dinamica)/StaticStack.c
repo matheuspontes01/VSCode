@@ -122,3 +122,25 @@ Stack* Stack_concatenar(Stack* stack1, Stack* stack2) {
 
     return stack3;
 }
+
+bool Stack_isRepeating(Stack* stack, int info) {
+    for (int i = 0; i < stack->index + 1; i++) {
+        if (stack->data[i] == info) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int Stack_push_no_repeat(Stack* stack, int info) {
+    if (!Stack_full(stack)) {
+        if (!Stack_isRepeating(stack, info)) {
+            stack->index++;
+            stack->data[stack->index] = info;
+            return 1;
+        } else {
+            printf("Nao pode numero repetido na pilha.\n");
+        }
+    }
+    return 0;
+}

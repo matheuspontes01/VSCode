@@ -21,5 +21,8 @@ Stack* Stack_transfer(Stack*);
 bool Stack_info_igual(Stack*, int);
 Stack* Stack_intersecao(Stack*, Stack*);
 Stack* Stack_concatenar(Stack*, Stack*);
+int Stack_push_no_repeat(Stack*, int);
+bool Stack_isRepeating(Stack*, int);
+Stack* Stack_decimal_to_binary(int);
 
 #endif
