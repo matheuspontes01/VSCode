@@ -18,5 +18,8 @@ void Queue_print(Queue*);
 Queue* Queue_reverse(Queue*);
 int Queue_tail(Queue*, int*);
 bool Queue_remove_negative_numbers(Queue*);
+bool Queue_sorted(Queue*, int);
+bool Queue_fill_queue(Queue*, Queue*, Queue*);
+bool Queue_concatenate(Queue*, Queue*);
 
 #endif

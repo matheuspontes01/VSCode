@@ -101,7 +101,7 @@ void Queue_print(Queue* fila) {
     if (fila->end == NULL) {
         printf("Lista vazia\n");
     } else {
-        TNo* aux = fila->end->prox;
+        TNo* aux = fila->end->prox; // inicio
         do {
             printf("%d, ", aux->info);
             aux = aux->prox;
@@ -129,7 +129,7 @@ Queue* Queue_reverse(Queue* f1) {
 }
 
 bool Queue_remove_negative_numbers(Queue* f1) { // nao sei o que deu de errado aq
-    if (!f1 || !f1->end) return false;
+    if (Queue_empty(f1)) return false;
     TNo* aux = f1->end->prox;
     TNo* anterior = f1->end;
     do {
@@ -166,6 +166,63 @@ bool Queue_remove_negative_numbers(Queue* f1) { // nao sei o que deu de errado a
             aux = aux->prox;
         }
     } while (f1->end && aux != f1->end->prox);
+
+    return true;
+}
+
+bool Queue_sorted(Queue* f1, int info) { // revisar dps
+    TNo* novo = TNo_createNFill(info);
+    if (!novo) return false;
+
+    if (f1->end == NULL) {
+        novo->prox = novo;
+        f1->end = novo;
+    } else {
+        TNo* aux = f1->end->prox; 
+        TNo* anterior = f1->end;
+
+        do {
+            if (novo->info < aux->info) break;  
+            anterior = aux;
+            aux = aux->prox;
+        } while (aux != f1->end->prox);
+
+        anterior->prox = novo;
+        novo->prox = aux;
+
+        if (aux == f1->end->prox && novo->info >= anterior->info) {
+            f1->end = novo;
+        }
+    }
+    f1->qty++;
+    return true;
+}
+
+bool Queue_fill_queue(Queue* f1, Queue* f2, Queue* f3) { // nao sei o que de errado aq 
+    if (Queue_empty(f1) || Queue_empty(f2)) return false;
+    int temp;
+    while (Queue_dequeue(f1, &temp)){
+        Queue_sorted(f3, temp);
+    }
+
+    while (Queue_dequeue(f2, &temp)){
+        Queue_sorted(f3, temp);
+    }
+
+    return true;
+}
+
+bool Queue_concatenate(Queue* f1, Queue* f2) { // nao sei oq esta acontecendo
+    if (Queue_empty(f1) || Queue_empty(f2)) return false;
+
+    int temp;
+    while (Queue_dequeue(f2, &temp)) {
+        printf("Dequeued from f2: %d\n", temp);
+        Queue_enqueue(f1, temp);
+    }
+
+    printf("Checar se f2 esta vazia: \n");
+    Queue_print(f2);
 
     return true;
 }
