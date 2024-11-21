@@ -31,11 +31,5 @@ int main() {
     }
     Stack_print(stack);
 
-    int temp;
-    while (Stack_pop(stack, &temp)) {
-        printf("%d, ", temp);
-    }
-    putchar('\n');
-
     return 0;
 }
