@@ -128,9 +128,14 @@ Queue* Queue_reverse(Queue* f1) { // ok
     return f2;
 }
 
+<<<<<<< HEAD
 bool Queue_remove_negative_numbers(Queue* f1) { // ok
     if (Queue_empty(f1)) return false;
 
+=======
+bool Queue_remove_negative_numbers(Queue* f1) { // nao sei o que deu de errado aq
+    if (Queue_empty(f1)) return false;
+>>>>>>> a227b1f86fc1c67ccb11fe440ef0b614a429fdf3
     TNo* aux = f1->end->prox;
     TNo* anterior = f1->end;
 
@@ -167,7 +172,11 @@ bool Queue_remove_negative_numbers(Queue* f1) { // ok
     return true;
 }
 
+<<<<<<< HEAD
 bool Queue_sorted(Queue* f1, int info) { // ok
+=======
+bool Queue_sorted(Queue* f1, int info) { // revisar dps
+>>>>>>> a227b1f86fc1c67ccb11fe440ef0b614a429fdf3
     TNo* novo = TNo_createNFill(info);
     if (!novo) return false;
 
@@ -184,6 +193,7 @@ bool Queue_sorted(Queue* f1, int info) { // ok
             aux = aux->prox;
         } while (aux != f1->end->prox);
 
+<<<<<<< HEAD
         if (aux == f1->end->prox) {
             novo->prox = f1->end->prox;
             f1->end->prox = novo;
@@ -193,13 +203,24 @@ bool Queue_sorted(Queue* f1, int info) { // ok
         } else {
             novo->prox = aux; // aq pode ocorre tambem caso novo->info seja a maior informacao tbm
             anterior->prox = novo;
+=======
+        anterior->prox = novo;
+        novo->prox = aux;
+
+        if (aux == f1->end->prox && novo->info >= anterior->info) {
+            f1->end = novo;
+>>>>>>> a227b1f86fc1c67ccb11fe440ef0b614a429fdf3
         }
     }
     f1->qty++;
     return true;
 }
 
+<<<<<<< HEAD
 bool Queue_fill_queue(Queue* f1, Queue* f2, Queue* f3) { // nao sei pq deu errado aq 
+=======
+bool Queue_fill_queue(Queue* f1, Queue* f2, Queue* f3) { // nao sei o que de errado aq 
+>>>>>>> a227b1f86fc1c67ccb11fe440ef0b614a429fdf3
     if (Queue_empty(f1) || Queue_empty(f2)) return false;
     int temp;
     while (Queue_dequeue(f1, &temp)){
@@ -213,6 +234,7 @@ bool Queue_fill_queue(Queue* f1, Queue* f2, Queue* f3) { // nao sei pq deu errad
     return true;
 }
 
+<<<<<<< HEAD
 bool Queue_concatenate(Queue* f1, Queue* f2) { // nao sei pq deu errado aq
     if (!f1 || !f2) return false;
 
@@ -308,4 +330,19 @@ Queue* queue_intercalar(Queue* f1, Queue* f2) {
     } while (aux1 != NULL || aux2 != NULL);
 
     return f3;
+=======
+bool Queue_concatenate(Queue* f1, Queue* f2) { // nao sei oq esta acontecendo
+    if (Queue_empty(f1) || Queue_empty(f2)) return false;
+
+    int temp;
+    while (Queue_dequeue(f2, &temp)) {
+        printf("Dequeued from f2: %d\n", temp);
+        Queue_enqueue(f1, temp);
+    }
+
+    printf("Checar se f2 esta vazia: \n");
+    Queue_print(f2);
+
+    return true;
+>>>>>>> a227b1f86fc1c67ccb11fe440ef0b614a429fdf3
 }
