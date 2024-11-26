@@ -221,3 +221,57 @@ int Stack_push_no_repeat(Stack* stack, int info) {
     }
     return 1;
 }
+
+bool Stack_sorted(Stack* stack, int info) {
+    TNo* novo = TNo_createNFill(info);
+    if (!novo) return false;
+
+    if (stack->inicio == NULL) {
+        stack->inicio = novo;
+    } else {
+        TNo* aux = stack->inicio;
+        TNo* anterior;
+        while (aux != NULL && novo->info > aux->info) {
+            anterior = aux;
+            aux = aux->prox;
+        }
+        if (aux == stack->inicio) {
+            novo->prox = stack->inicio;
+            stack->inicio = novo;
+        } else if (aux == NULL) {
+            TNo* fim = stack->inicio;
+            while (fim->prox != NULL) {
+                fim = fim->prox;
+            }
+            fim->prox = novo;
+        } else {
+            novo->prox = anterior->prox;
+            anterior->prox = novo;
+        }
+    }
+
+    return true;
+}
+
+bool Stack_show_remove(Stack* stack, int *info) {
+    if (stack->inicio != NULL) {
+        *info = stack->inicio->info;
+        TNo* aux = stack->inicio;
+        stack->inicio = stack->inicio->prox;
+        free(aux);
+    } else {
+        printf("Lista Vazia.\n");
+    }
+}
+
+bool Stack_concatenar_stack2NULL(Stack* stack1, Stack* stack2) {
+    if (!stack1 || !stack2) return false;
+
+    TNo* aux = stack2->inicio;
+    int temp;
+    while (Stack_pop(stack2, &temp)) {
+        Stack_push(stack1, temp);
+    }
+
+    return true;
+}

@@ -1,5 +1,6 @@
 #include "Queue.h"
 #include <stdlib.h>
+#include <stdio.h>
 #define MAX 5
 
 struct queue{
@@ -62,3 +63,33 @@ int Queue_qty(Queue* fila) {
 // A fila circular trata o final da estrutura como conectado ao inicio
 // formando um ciclo logico. Assim, o proximo indice apos a ultima
 // posicao volta ao indice 0.
+
+void Queue_reverse_static(Queue* f1) {
+    if (Queue_empty(f1)) return;
+
+    int pilha[MAX];
+    int i = 0, temp; // posso colocar i = -1, e quando de tirar o elemento da fila, incremento i
+
+    while (!Queue_empty(f1)) {
+        Queue_dequeue(f1, &temp);
+        pilha[i] = temp;
+        i++;
+    }
+    i--;
+    while (i >= 0) {
+        Queue_enqueue(f1, pilha[i]);
+        i--;
+    }
+}
+
+void Queue_print(Queue* fila) {
+    if (Queue_empty(fila)) {
+        printf("Lista vazia\n");
+    } else {
+        for (int i = 0; i < fila->qty; i++) {
+            int index = (fila->head + i) % MAX;
+            printf("%d, ", fila->data[index]);
+        }
+        putchar('\n');
+    }
+}

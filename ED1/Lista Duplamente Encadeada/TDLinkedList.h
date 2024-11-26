@@ -40,4 +40,10 @@ bool TDLinkedList_sorted_decrescente(TDLinkedList*, int);
 
 TDLinkedList* TDLinkedList_concatenar(TDLinkedList* list1, TDLinkedList* list2);
 
+void TDLinkedList_check_sorted(TDLinkedList*);
+
+void TDLinkedList_equallist_equaldata(TDLinkedList*, TDLinkedList*);
+
+bool TDLinkedList_info_igual(TDLinkedList*, int);
+
 #endif

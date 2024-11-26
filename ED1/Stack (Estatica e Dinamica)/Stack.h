@@ -24,5 +24,8 @@ Stack* Stack_concatenar(Stack*, Stack*);
 int Stack_push_no_repeat(Stack*, int);
 bool Stack_isRepeating(Stack*, int);
 Stack* Stack_decimal_to_binary(int);
+bool Stack_sorted(Stack*, int);
+bool Stack_show_remove(Stack*, int*);
+bool Stack_concatenar_stack2NULL(Stack*, Stack*);
 
 #endif

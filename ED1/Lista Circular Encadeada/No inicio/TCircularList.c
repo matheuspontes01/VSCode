@@ -415,7 +415,7 @@ float TCircularList_calcular_media(TCircularList* list) {
     return media;
 }
 
-bool TCircularList_insert_position(TCircularList* list, int info_list, char direction, int info_insert) {
+bool TCircularList_insert_position(TCircularList* list, int info_list, char direction, int info_insert) { // ok
     TNo* novo = TNo_createNFill(info_insert);
     if (!novo) return false;
 

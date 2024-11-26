@@ -144,3 +144,20 @@ int Stack_push_no_repeat(Stack* stack, int info) {
     }
     return 0;
 }
+
+bool Stack_sorted(Stack* stack, int info) {
+    if (Stack_full(stack)) return false;
+
+    int i = 0;
+    while (i <= stack->index && info > stack->data[i]) {
+        i++;
+    }
+
+    for (int j = stack->index; j >= i; j--) {
+        stack->data[j + 1] = stack->data[j];
+    }
+
+    stack->data[i] = info;
+    stack->index++; 
+    return true;
+}

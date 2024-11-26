@@ -33,6 +33,18 @@ int main() {
         }
     }
 
+    TDLinkedList* list2 = TDLinkedList_create();
+
+    int N[] = {5, 3, 6, 1, 2, 6};
+
+    for (int i = 0; i < 6; i++) {
+        if (!TDLinkedList_sorted(list2, N[i])){
+            printf("Problema ao inserir o valor: %d\n", N[i]);
+        }
+    }
+    TDLinkedList_equallist_equaldata(list, list2);
+
+    TDLinkedList_check_sorted(list);
     TDLinkedList_print(list);
 
     //TDLinkedList_reverse_print(list);
@@ -45,15 +57,6 @@ int main() {
     //TDLinkedList_deleteList(list);
    // printf("Lista removida\n");
     //TDLinkedList_print(list);
-    TDLinkedList* list2 = TDLinkedList_create();
-
-    int N[] = {16, 4, 10, 8};
-
-    for (int i = 0; i < 4; i++) {
-        if (!TDLinkedList_sorted(list2, N[i])){
-            printf("Problema ao inserir o valor: %d\n", N[i]);
-        }
-    }
 
     TDLinkedList_print(list2);
 

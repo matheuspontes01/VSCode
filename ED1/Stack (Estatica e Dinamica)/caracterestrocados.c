@@ -21,7 +21,7 @@ int main()
         if(string[i] == ' ' || string[i] == '.') // imprime tudo que foi alocado na pilha, deletando e imprimindo tudo que esta sendo removido na pilha
             print_stack(stack);
         else
-            Stack_push(stack, string[i]); 
+            Stack_push(stack, string[i]);  // senao, vai sendo inserido na pilha os caracteres
     }
     if (!Stack_empty(stack))
         print_stack(stack);

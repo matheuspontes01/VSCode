@@ -290,3 +290,53 @@ TDLinkedList* TDLinkedList_concatenar(TDLinkedList* list1, TDLinkedList* list2) 
     return list3;
 }
 
+void TDLinkedList_check_sorted(TDLinkedList* list) {
+    TNo* ant = list->inicio;
+    TNo* next = list->inicio->prox;
+    bool check = true;
+    while (next != NULL) {
+        if (ant->info > next->info) {
+            check = false;
+            break;
+        }
+        ant = next;
+        next = next->prox;
+    }
+
+    if (check) {
+        printf("A lista e ordenada.\n");
+    } else {
+        printf("A lista nao e ordenada\n");
+    }
+}
+
+bool TDLinkedList_info_igual(TDLinkedList* list, int info) {
+    TNo* aux = list->inicio;
+    while (aux != NULL) {
+        if (aux->info == info) {
+            return true;
+        }
+        aux = aux->prox;
+    }
+    return false;
+}
+
+void TDLinkedList_equallist_equaldata(TDLinkedList* list, TDLinkedList* list2) {
+    if (!list || !list2) return;
+    TNo* aux2 = list2->inicio;
+
+    bool check = true;
+    while (aux2 != NULL) {
+        if (!TDLinkedList_info_igual(list, aux2->info)) {
+            check = false;
+            break;
+        }
+        aux2 = aux2->prox;
+    }
+
+    if (check) {
+        printf("As listas sao iguais.\n");
+    } else {
+        printf("As listas nao sao iguais.\n");
+    }
+}

@@ -22,7 +22,6 @@ int main() {
     printf("Pilha 2:\n");
     Stack_print(stack2);
 
-    printf("Pilha 3 concatenada com a lista 1 e 2: \n");
-    Stack* stack3 = Stack_concatenar(stack1, stack2);
-    Stack_print(stack3);
+    Stack_concatenar_stack2NULL(stack1, stack2);
+    Stack_print(stack1);
 }
