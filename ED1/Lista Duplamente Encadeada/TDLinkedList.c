@@ -340,3 +340,4 @@ void TDLinkedList_equallist_equaldata(TDLinkedList* list, TDLinkedList* list2) {
         printf("As listas nao sao iguais.\n");
     }
 }
+

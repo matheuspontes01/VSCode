@@ -32,6 +32,7 @@ int main() {
             printf("Problema ao inserir o valor: %d\n", V[i]);
         }
     }
+    TDLinkedList_print(list);
 
     TDLinkedList* list2 = TDLinkedList_create();
 
@@ -42,6 +43,7 @@ int main() {
             printf("Problema ao inserir o valor: %d\n", N[i]);
         }
     }
+
     TDLinkedList_equallist_equaldata(list, list2);
 
     TDLinkedList_check_sorted(list);

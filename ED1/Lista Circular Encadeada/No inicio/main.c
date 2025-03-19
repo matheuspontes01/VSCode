@@ -27,7 +27,12 @@ int main() {
         if (!TCircularList_sorted(list, V[i])) {
             printf("Erro ao inserir o valor: %d\n", V[i]);
         }
-    }
+    }  
+    int n_primeiros;
+    printf("Digite quantos primeiros numeros voce deseja deletar: \n");
+    scanf("%d", &n_primeiros);
+
+    TCircularList_remove_n_firstElements(list, n_primeiros);
 
     TCircularList_print(list);
 

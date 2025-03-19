@@ -500,3 +500,32 @@ TCircularList* TCircularList_reverse_list(TCircularList* list) {
 
     return list2;
 }
+
+bool TCircularList_remove_n_firstElements(TCircularList* list, int info) {
+    if (!list->inicio) return false;
+    if (info <= 0) return false;
+
+    int i = info;
+    TNo* aux = list->inicio;
+    TNo* fim;
+    while (aux->prox != list->inicio) {
+        fim = fim->prox;
+    }
+
+    while (i != 0) {
+        TNo* proximo = aux->prox;
+        fim->prox = proximo;
+        list->inicio = proximo;
+        free(aux);
+        aux = proximo;
+        i--;
+    }
+
+    return true;
+}
+
+bool TCircularList_change_infos(TCircularList* list, int info1, int info2) {
+    if (!list->inicio) return false;
+
+    
+}

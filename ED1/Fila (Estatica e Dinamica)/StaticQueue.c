@@ -68,7 +68,7 @@ void Queue_reverse_static(Queue* f1) {
     if (Queue_empty(f1)) return;
 
     int pilha[MAX];
-    int i = 0, temp; // posso colocar i = -1, e quando de tirar o elemento da fila, incremento i
+    int i = 0, temp; // posso colocar i = -1, e quando colocar o elemento da fila, incremento i
 
     while (!Queue_empty(f1)) {
         Queue_dequeue(f1, &temp);

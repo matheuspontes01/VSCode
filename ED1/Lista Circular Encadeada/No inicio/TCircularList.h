@@ -42,4 +42,7 @@ bool TCircularList_equals_list(TCircularList*, TCircularList*);
 
 TCircularList* TCircularList_reverse_list(TCircularList*);
 
+bool TCircularList_remove_n_firstElements(TCircularList*, int);
+
+
 #endif //TCIRCULARLIST_H
