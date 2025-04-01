@@ -1,51 +1,56 @@
 import random
 import string
+import hashlib
 
-def generate_random_strings(n, length=10):
-    """Gera uma lista de n strings aleatórias com tamanho definido."""
-    return [''.join(random.choices(string.ascii_letters + string.digits, k=length)) for _ in range(n)]
-
-def folding_method(key, table_size):
-    """Implementa o método da dobra para dispersão."""
-    key_bytes = key.encode('utf-8')
-    parts = [int.from_bytes(key_bytes[i:i+4], 'little', signed=False) for i in range(0, len(key_bytes), 4)]
-    return sum(parts) % table_size
-
-def djb2_hash(key, table_size):
-    """Implementa a função DJB2 Hash."""
-    hash_value = 5381
-    for char in key:
-        hash_value = ((hash_value << 5) + hash_value) + ord(char)  # hash * 33 + char
+def fold_hash(key, table_size):
+    """ Método da dobra para calcular hash """
+    key_str = str(key)
+    chunk_size = 4  # Divisão da chave em partes de 4 caracteres
+    chunks = [key_str[i:i+chunk_size] for i in range(0, len(key_str), chunk_size)]
+    hash_value = sum(int(chunk) for chunk in chunks if chunk.isdigit())
     return hash_value % table_size
 
-def count_collisions(keys, hash_function, table_size):
-    """Conta o número de colisões usando uma determinada função de hash."""
+def djb2_hash(key, table_size):
+    """ Algoritmo DJB2 """
+    hash_value = 5381
+    for char in str(key):
+        hash_value = ((hash_value << 5) + hash_value) + ord(char)
+    return hash_value % table_size
+
+def generate_keys(filename, num_keys):
+    """ Gera um arquivo com chaves aleatórias """
+    with open(filename, 'w') as f:
+        for _ in range(num_keys):
+            key = ''.join(random.choices(string.digits, k=10))  # Chave de 10 dígitos
+            f.write(key + '\n')
+
+def count_collisions(filename, hash_function, table_size):
+    """ Conta colisões utilizando uma função hash """
     hash_table = {}
-    collisions = 0
+    with open(filename, 'r') as f:
+        for line in f:
+            key = line.strip()
+            hash_value = hash_function(key, table_size)
+            if hash_value in hash_table:
+                hash_table[hash_value] += 1
+            else:
+                hash_table[hash_value] = 1
     
-    for key in keys:
-        index = hash_function(key, table_size)
-        if index in hash_table:
-            collisions += 1
-        else:
-            hash_table[index] = key
-    
+    collisions = sum(count - 1 for count in hash_table.values() if count > 1)
     return collisions
 
-def main():
-    sizes = [1000, 10000, 1000000]
-    table_size = 2**20  # Tamanho grande para reduzir colisões
-    
-    for size in sizes:
-        keys = generate_random_strings(size)
-        
-        collisions_folding = count_collisions(keys, folding_method, table_size)
-        collisions_djb2 = count_collisions(keys, djb2_hash, table_size)
-        
-        print(f"Tamanho da entrada: {size}")
-        print(f"Colisões (Método da Dobra): {collisions_folding}")
-        print(f"Colisões (DJB2 Hash): {collisions_djb2}")
-        print("-" * 40)
+# Gera arquivos de chaves
+generate_keys("keys_1000.txt", 1000)
+generate_keys("keys_10000.txt", 10000)
+generate_keys("keys_1000000.txt", 1000000)
 
-if __name__ == "__main__":
-    main()
+# Contabiliza colisões
+sizes = [1000, 10000, 1000000]
+for size in sizes:
+    filename = f"keys_{size}.txt"
+    table_size = size  # Ajusta o tamanho da tabela para o número de chaves
+    fold_collisions = count_collisions(filename, fold_hash, table_size)
+    djb2_collisions = count_collisions(filename, djb2_hash, table_size)
+    print(f"{size} chaves:")
+    print(f" - Método da dobra: {fold_collisions} colisões")
+    print(f" - DJB2 Hash: {djb2_collisions} colisões")
