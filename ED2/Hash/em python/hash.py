@@ -21,8 +21,9 @@ def generate_keys(filename, num_keys):
     """ Gera um arquivo com chaves aleatórias """
     with open(filename, 'w') as f:
         for _ in range(num_keys):
-            key = ''.join(random.choices(string.digits, k=10))  # Chave de 10 dígitos
-            f.write(key + '\n')
+            key = random.randint(10**9, 10**10 - 1)  # Gera um número inteiro de 10 dígitos
+            key_str = str(key)  # Converte para string
+            f.write(key_str + '\n')
 
 def count_collisions(filename, hash_function, table_size):
     """ Conta colisões utilizando uma função hash """
