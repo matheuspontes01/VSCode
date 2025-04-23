@@ -33,4 +33,16 @@ bool BinTree_transplant(BinTree*, TNo*, TNo*);
 
 bool BinTree_delete(BinTree*, TNo*);
 
+int BinTree_count_elements(TNo*);
+
+int BinTree_count_nonleafs(TNo*);
+
+int BinTree_count_leafs(TNo*);
+
+int BinTree_height(TNo*);
+
+void BinTree_print_odd(TNo*);
+
+int BinTree_onechild(TNo*);
+
 #endif

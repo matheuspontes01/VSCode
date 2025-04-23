@@ -41,4 +41,18 @@ int main() {
     BinTree_delete(T, BinTree_search_r(T->root, 8));
 
     print_tree(T);
+
+    printf("Contagem de elementos: %d\n", BinTree_count_elements(T->root));
+
+    printf("Contagem de nos nao folhas: %d\n", BinTree_count_nonleafs(T->root));
+
+    printf("Contagem de folhas: %d\n", BinTree_count_leafs(T->root));
+
+    printf("Altura da arvore: %d\n", BinTree_height(T->root));
+
+    printf("Numeros impares da arvore: \n");
+    BinTree_print_odd(T->root);
+    printf("\n");
+
+    printf("Nos que possuem somente um filho: %d\n", BinTree_onechild(T->root));
 }

@@ -19,11 +19,11 @@ void maxHeapify(int heapSize, int A[heapSize], int i) { // O(logn)
 
     int largest = i;
 
-    if (l < heapSize & A[l] > A[i]) {
+    if (l < heapSize && A[l] > A[i]) {
         largest = l;
     }
 
-    if (r < heapSize & A[r] > A[largest]) {
+    if (r < heapSize && A[r] > A[largest]) {
         largest = r;
     }
 
