@@ -113,7 +113,6 @@ TNo* BinTree_min(TNo* x) {
 }
 
 TNo* BinTree_max(TNo* x) {
-    
     while (x->right != NULL) {
         x = x->right;
     }
@@ -121,7 +120,7 @@ TNo* BinTree_max(TNo* x) {
     return x;
 }
 
-bool BinTree_transplant(BinTree* T, TNo* u, TNo* v) {
+bool BinTree_transplant(BinTree* T, TNo* u, TNo* v) { // Substituir o subárvore enraizada no nó u pela subárvore enraizada no nó v dentro da árvore T.
     if (!T) return false;
 
     if (u->p == NULL)
@@ -137,7 +136,7 @@ bool BinTree_transplant(BinTree* T, TNo* u, TNo* v) {
     return true;
 }
 
-bool BinTree_delete(BinTree* T, TNo* z) {
+bool BinTree_delete(BinTree* T, TNo* z) { // Remover o nó z da árvore binária de busca T.
     if (!T) return false;
 
     if (z->left == NULL) {
@@ -157,4 +156,68 @@ bool BinTree_delete(BinTree* T, TNo* z) {
     }
 
     return true;
+}
+
+int BinTree_count_elements(TNo* x) {
+    if (x == NULL) {
+        return 0;
+    }
+
+    return 1 + BinTree_count_elements(x->left) + BinTree_count_elements(x->right);
+}
+
+int BinTree_count_nonleafs(TNo* x) {
+    if (x == NULL || (x->left == NULL && x->right == NULL)){
+        return 0;
+    }
+
+    return 1 + BinTree_count_nonleafs(x->left) + BinTree_count_nonleafs(x->right);
+}
+
+int BinTree_count_leafs(TNo* x) {
+    if (x == NULL)
+        return 0;
+
+    if (x->left == NULL && x->right == NULL)
+        return 1;
+
+    return BinTree_count_leafs(x->left) + BinTree_count_leafs(x->right);
+}
+
+int BinTree_height(TNo* x) {
+    if (x == NULL) return 0;
+
+    int hl = 0, hr = 0;
+
+    if (x->left != NULL) {
+        hl = BinTree_height(x->left);
+    } else if (x->right != NULL) {
+        hr = BinTree_height(x->right);
+    }
+
+    if (hl > hr) {
+        return hl + 1;
+    } else {
+        return hr + 1;
+    }
+}
+
+void BinTree_print_odd(TNo* x) {
+    if (x != NULL) {
+        if (x->key % 2 != 0) {
+            printf("%d, ", x->key);
+        }
+        BinTree_print_odd(x->left);
+        BinTree_print_odd(x->right);
+    }
+}
+
+int BinTree_onechild(TNo* x) {
+    if (x == NULL) return 0;
+
+    int count = 0;
+    if ((x->left == NULL && x->right != NULL) || (x->left != NULL && x->right == NULL)) 
+        count = 1;
+
+    return count + BinTree_onechild(x->left) + BinTree_onechild(x->right);
 }
