@@ -6,7 +6,10 @@
     "stack.h": "c",
     "array": "cpp",
     "atomic": "cpp",
+<<<<<<< Updated upstream
     "bit": "cpp",
+=======
+>>>>>>> Stashed changes
     "*.tcc": "cpp",
     "cctype": "cpp",
     "clocale": "cpp",
@@ -28,10 +31,15 @@
     "memory": "cpp",
     "memory_resource": "cpp",
     "numeric": "cpp",
+<<<<<<< Updated upstream
     "optional": "cpp",
     "random": "cpp",
     "string": "cpp",
     "string_view": "cpp",
+=======
+    "random": "cpp",
+    "string": "cpp",
+>>>>>>> Stashed changes
     "system_error": "cpp",
     "tuple": "cpp",
     "type_traits": "cpp",
