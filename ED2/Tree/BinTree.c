@@ -189,11 +189,8 @@ int BinTree_height(TNo* x) {
 
     int hl = 0, hr = 0;
 
-    if (x->left != NULL) {
-        hl = BinTree_height(x->left);
-    } else if (x->right != NULL) {
-        hr = BinTree_height(x->right);
-    }
+    hl = BinTree_height(x->left);
+    hr = BinTree_height(x->right);
 
     if (hl > hr) {
         return hl + 1;
