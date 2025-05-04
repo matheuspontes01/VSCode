@@ -218,3 +218,27 @@ int BinTree_onechild(TNo* x) {
 
     return count + BinTree_onechild(x->left) + BinTree_onechild(x->right);
 }
+
+TNo* BinTree_invert(TNo* root) {
+    if (root != NULL) {
+        TNo* temp = root->right;
+        root->right = root->left;
+        root->left = temp;
+
+        BinTree_invert(root->left);
+        BinTree_invert(root->right);
+    }
+
+    return root;
+}
+
+int BinTree_find_value(TNo* root, int key) {
+    if (root == NULL) return 1;
+
+    if (key == root->key) return 0;
+
+    if (BinTree_find_value(root->left, key) == 0) return 0; 
+    if (BinTree_find_value(root->right, key) == 0) return 0;
+
+    return 1;
+}

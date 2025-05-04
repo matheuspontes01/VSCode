@@ -45,4 +45,8 @@ void BinTree_print_odd(TNo*);
 
 int BinTree_onechild(TNo*);
 
+TNo* BinTree_invert(TNo*);
+
+int BinTree_find_value(TNo*, int);
+
 #endif
