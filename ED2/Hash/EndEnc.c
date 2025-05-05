@@ -13,16 +13,16 @@ int hash(int chave, int tamanho) {
     return chave % tamanho;
 }
 
-void inicializarTabela(Registro *T, int tamanho) {
-    for (int i = 0; i < tamanho; i++) {
-        T[i].estado = NAO_OCUPADO;
+void inicializarTabela(Registro *T, int m) {
+    for (int i = 0; i < m; i++) {
         T[i].pont = i;
+        T[i].estado = NAO_OCUPADO;
     }
 }
 
-void busca(int chave, int *end, int *a, int tamanho, Registro *T) {
-    *a = 0, *end = hash(chave, tamanho);
-    
+void busca(int x, Registro *T, int m, int *end, int *a) {
+    *end = hash(x, m);
+
     if (T[*end].estado == NAO_OCUPADO) {
         *a = 2;
         return;
@@ -30,7 +30,7 @@ void busca(int chave, int *end, int *a, int tamanho, Registro *T) {
 
     int j = *end;
     do {
-        if (T[j].estado == OCUPADO && T[j].chave == chave) {
+        if (T[j].estado == OCUPADO && T[j].chave == x) {
             *a = 1;
             *end = j;
             return;
@@ -41,71 +41,77 @@ void busca(int chave, int *end, int *a, int tamanho, Registro *T) {
     *a = 2;
 }
 
-void inserir(int chave, int tamanho, Registro *T) {
-    int a, end;
-    busca(chave, &a, &end, tamanho, T);
+void inserir(int x, Registro *T, int m) {
+    int end, a;
+    busca(x, T, m, &end, &a);
 
     if (a != 1) {
         int j, i = 1;
-        if (end != hash(chave, tamanho)) {
+        if (end != hash(x, m))
             j = end;
-        } else {
-            j = hash(chave, tamanho);
-        }
+        else
+            j = hash(x, m);
 
-        while (i <= tamanho) {
+        while (i <= m) {
             if (T[j].estado == NAO_OCUPADO) {
                 break;
             } else {
-                j = (j + 1) % tamanho;
+                j = (j + 1) % m;
                 i++;
             }
         }
 
-
-        if (i == tamanho + 1) {
+        if (i == m + 1) {
             printf("Insercao invalida: overflow\n");
             return;
-        } 
+        }
 
         if (i == 1) {
-            T[j].chave = chave;
-            T[j].estado = OCUPADO;
+            T[end].chave = x;
+            T[end].estado = OCUPADO;
         } else {
             int temp = T[j].pont;
-            T[j].pont = T[hash(chave, tamanho)].pont;
-            T[hash(chave, tamanho)].pont = temp;
+            T[j].pont = T[hash(x, m)].pont;
+            T[hash(x, m)].pont = temp;
 
-            T[j].chave = chave;
+            T[j].chave = x;
             T[j].estado = OCUPADO;
         }
-
     } else {
-        printf("Insercao invalida: chave existente\n");
+        printf("Insercao invalida: chave ja existente\n");
     }
 }
 
-void print(Registro *T, int tamanho) {
+void remover(int x, Registro *T, int m) {
+    int a, end;
+    busca(x, T, m, &end, &a);
+
+    if (a == 1)
+        T[end].estado == NAO_OCUPADO;
+    else
+        printf("Exclusao invalida: chave nao existente");
+} 
+
+void print(Registro *T, int m) {
     printf("Index | Chave | Estado | Pont\n");
-    for (int i = 0; i < tamanho; i++) {
-        if (T[i].estado == OCUPADO) {
-            printf("%d   |  %d   |   %d   |   %d\n", i, T[i].chave, T[i].estado, T[i].pont);
-        } else {
-            printf("%d   |  ---   |   %d   |   %d\n", i, T[i].estado, T[i].pont);
-        }
+    printf("-------------------------------\n");
+    for (int i = 0; i < m; i++) {
+        if (T[i].estado == OCUPADO)
+            printf("  %2d   |  %4d |   %d    |  %2d\n", i, T[i].chave, T[i].estado, T[i].pont);
+        else
+            printf("  %2d   |  ---- |   %d    |  %2d\n", i, T[i].estado, T[i].pont);
     }
 }
 
-    
 int main() {
     Registro T[10];
 
     inicializarTabela(T, 10);
 
-    int n[8] = {15, 9, 21, 18, 10, 3, 23, 29};
+    int n[8] = {2, 7, 10, 26, 34, 5, 8, 16};
 
     for (int i = 0; i < 8; i++) {
-        inserir(n[i], 10, T);
+        inserir(n[i], T, 10);
     }
 
     print(T, 10);

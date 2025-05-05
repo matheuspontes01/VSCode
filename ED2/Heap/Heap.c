@@ -55,20 +55,82 @@ void heapSort(int heapSize, int A[heapSize]) {
     }
 }
 
+int verifica_heap(int *heap, int n) {
+    for (int i = 0; i < n; i++){
+        int l = left(i);
+        int r = right(i);
+
+        if (l < n && heap[i] < heap[l]) return 0;
+        if (r < n && heap[i] < heap[r]) return 0;
+    }
+    return 1;
+}
+
+int chave_minima(int* heap, int n) {
+    int start = n/2;
+    int min = heap[start]; 
+    for (int i = start + 1; i < n; i++) {
+        if (heap[i] < min) {
+            min = heap[i];
+        }
+    }
+
+    return min;
+}
+
+int chave_maxima(int *heap) {
+    return heap[0];
+}
+
+void removeHeap(int *heap, int i, int *n) {
+    if (i < 0 || i >= *n) {
+        printf("Indice invalido!\n");
+        return;
+    }
+
+    heap[i] = heap[(*n) - 1];
+    (*n)--;
+
+
+    if (i > 0 && heap[i] > heap[parent(i)]) {
+        while (i > 0 && heap[parent(i)] < heap[i]) {
+            int temp = heap[i];
+            heap[i] = heap[parent(i)];
+            heap[parent(i)] = temp;
+            i = parent(i);
+        }
+    } else {
+        maxHeapify(*n, heap, i);
+    }
+}
+
 int main() {
     int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int n = 10;
 
-    BuildMaxHeap(10, A);
+    printf("verifica que se e heap ou nao: %d\n", verifica_heap(A, 10));
 
-    for (int i = 0; i < 10; i++) {
+    BuildMaxHeap(n, A);
+
+    for (int i = 0; i < n; i++) {
         printf("%d ", A[i]);
     }
     printf("\n");
-    heapSort(10, A);
 
-    for (int i = 0; i < 10; i++) {
+    printf("chave min: %d\n", chave_minima(A, n));
+    printf("verifica que se e heap ou nao: %d\n", verifica_heap(A, n));
+
+    printf("Removendo elemento 3 da heap: \n");
+    removeHeap(A, 1, &n);
+    for (int i = 0; i < n; i++) {
         printf("%d ", A[i]);
     }
+    printf("\n");
 
+    printf("Fazendo sort na nossa heap: \n");
+    heapSort(n, A);
+    for (int i = 0; i < n; i++) {
+        printf("%d ", A[i]);
+    }
     return 0;
 }

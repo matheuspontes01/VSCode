@@ -36,6 +36,13 @@ int main() {
 
     BinTree_delete(T, max);
 
+    BinTree_invert(T->root);
+
+    print_tree(T);
+
+    printf("%d\n", BinTree_find_value(T->root, 13));
+
+    /*
     BinTree_delete(T, BinTree_search_r(T->root, 9));
     BinTree_delete(T, BinTree_search_r(T->root, 4));
     BinTree_delete(T, BinTree_search_r(T->root, 8));
@@ -54,5 +61,5 @@ int main() {
     BinTree_print_odd(T->root);
     printf("\n");
 
-    printf("Nos que possuem somente um filho: %d\n", BinTree_onechild(T->root));
+    printf("Nos que possuem somente um filho: %d\n", BinTree_onechild(T->root)); */
 }
