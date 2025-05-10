@@ -121,41 +121,41 @@ TNo* BinTree_max(TNo* x) {
 }
 
 bool BinTree_transplant(BinTree* T, TNo* u, TNo* v) { // Substituir o subárvore enraizada no nó u pela subárvore enraizada no nó v dentro da árvore T.
-    if (!T) return false;
+    if (!T) return false; // Se a arvore e nula, retorna falso
 
-    if (u->p == NULL)
-        T->root = v;
-    else if (u == u->p->left) 
-        u->p->left = v;
-    else
-        u->p->right = v;
+    if (u->p == NULL) // Se o no u tem pai igual a nulo
+        T->root = v; // Entao u e a raiz da arvore, logo v vira a raiz da arvore
+    else if (u == u->p->left) // Se u e filho da esquerda de seu pai
+        u->p->left = v; // Atualiza o ponteiro da esquerda do pai para apontar em v
+    else // Caso contrario, u e filho da direita de seu pai
+        u->p->right = v; // Atualiza o ponteiro da direita do pai para apontar em v
 
-    if (v != NULL)
-        v->p = u->p;
+    if (v != NULL) // Caso v nao seja nulo
+        v->p = u->p; // Atualiza o ponteiro para pai de v
 
-    return true;
+    return true; // Transplante concluido com sucesso
 }
 
 bool BinTree_delete(BinTree* T, TNo* z) { // Remover o nó z da árvore binária de busca T.
-    if (!T) return false;
+    if (!T) return false; // Caso a arvore seja nula, entao retorna false
 
-    if (z->left == NULL) {
+    if (z->left == NULL) { // Caso o no nao tem filho a esquerda (substitui pelo filho da direita) 
         BinTree_transplant(T, z, z->right);
-    } else if (z->right == NULL) {
+    } else if (z->right == NULL) { // Caso o no nao tem filho a direita (substitui pelo filho da esquerda)
         BinTree_transplant(T, z, z->left);
-    } else {
-        TNo* y = BinTree_min(z->right);
-        if (y->p != z) {
-            BinTree_transplant(T, y, y->right);
-            y->right = z->right;
-            y->right->p = y;
+    } else { // Caso que o no possui dois filhos
+        TNo* y = BinTree_min(z->right); // Achamos o sucessor desse no
+        if (y->p != z) { // Caso o sucessor nao seja filho direito de z
+            BinTree_transplant(T, y, y->right); // Faça o transplante de y pelo seu filho a direita
+            y->right = z->right; // Ajusta o ponteiro da direita de y para apontar para a direita de z
+            y->right->p = y; // Atualiza o ponteiro do novo pai da direita de y
         } 
-        BinTree_transplant(T, z, y);
-        y->left = z->left;
-        y->left->p = y;
+        BinTree_transplant(T, z, y); // Faz o transplante de z pelo y (sucessor de z) -> substitui z por y
+        y->left = z->left; // Ajusta o ponteiro da esquerda de y para apontar para a esquerda de z
+        y->left->p = y; // Atualiza o ponteiro do pai do novo filho esquerdo de y
     }
 
-    return true;
+    return true; // Remocao concluida
 }
 
 int BinTree_count_elements(TNo* x) {
@@ -185,7 +185,7 @@ int BinTree_count_leafs(TNo* x) {
 }
 
 int BinTree_height(TNo* x) {
-    if (x == NULL) return 0;
+    if (x == NULL) return -1;
 
     int hl = 0, hr = 0;
 

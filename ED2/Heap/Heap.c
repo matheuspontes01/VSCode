@@ -82,27 +82,40 @@ int chave_maxima(int *heap) {
     return heap[0];
 }
 
+// Função para remover um elemento do heap na posição i.
+// heap: vetor representando o heap
+// i: índice do elemento a ser removido
+// n: ponteiro para o tamanho atual do heap
 void removeHeap(int *heap, int i, int *n) {
+    // Verifica se o índice é válido dentro do heap
     if (i < 0 || i >= *n) {
         printf("Indice invalido!\n");
         return;
     }
 
+    // Substitui o elemento na posição i pelo último elemento do heap
     heap[i] = heap[(*n) - 1];
+    
+    // Reduz o tamanho do heap em 1 (remove o último elemento logicamente)
     (*n)--;
 
-
+    // Caso o novo valor em i seja maior que o seu pai, ele pode precisar subir na árvore (subir no heap)
     if (i > 0 && heap[i] > heap[parent(i)]) {
+        // Enquanto não chegar à raiz e o valor do pai for menor que o atual, troca os dois
         while (i > 0 && heap[parent(i)] < heap[i]) {
             int temp = heap[i];
             heap[i] = heap[parent(i)];
             heap[parent(i)] = temp;
+
+            // Atualiza i para o índice do pai, subindo na árvore
             i = parent(i);
         }
     } else {
+        // Caso contrário, o elemento pode estar fora de lugar para baixo (descer no heap)
         maxHeapify(*n, heap, i);
     }
 }
+
 
 int main() {
     int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
