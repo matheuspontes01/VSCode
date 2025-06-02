@@ -25,5 +25,7 @@ void right_rotate(RedBlack*, Node*);
 void RedBlack_insertFixUp(RedBlack*, Node*);
 void RedBlack_pre(RedBlack*, Node*);
 void RedBlack_in(RedBlack*, Node*);
+int RedBlack_Height(RedBlack*, Node*);
+int RedBlack_height_start(RedBlack*);
 
 #endif

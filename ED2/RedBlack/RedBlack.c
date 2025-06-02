@@ -195,3 +195,22 @@ void RedBlack_in(RedBlack* T, Node* root) {
         RedBlack_pre(T, root->right);
     }
 }
+
+int RedBlack_Height(RedBlack* T, Node* x) {
+    if (x == T->nil || (x->left == T->nil && x->right == T->nil)) {
+        return 0;
+    }
+
+    int hl = RedBlack_Height(T, x->left);
+    int hr = RedBlack_Height(T, x->right);
+
+    if (hl > hr) {
+        return hl + 1;
+    } else {
+        return hr + 1;
+    }
+}
+
+int RedBlack_height_start(RedBlack* T) {
+    return RedBlack_Height(T, T->root);
+}

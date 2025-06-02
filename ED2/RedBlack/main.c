@@ -27,4 +27,6 @@ int main() {
     }
 
     print_Tree(T);
+
+    printf("Altura da arvore: %d\n", RedBlack_height_start(T));
 }
