@@ -214,3 +214,109 @@ int RedBlack_Height(RedBlack* T, Node* x) {
 int RedBlack_height_start(RedBlack* T) {
     return RedBlack_Height(T, T->root);
 }
+
+Node* RedBlack_min(RedBlack* T, Node* x) {
+    while (x->left != T->nil) {
+        x = x->left;
+    }
+    return x;
+}
+
+void RedBlack_transplant(RedBlack* T, Node* u, Node* v) {
+    if (u->p == T->nil) {
+        T->root = v;
+    } else if (u == u->p->left) {
+        u->p->left = v;
+    } else {
+        u->p->right = v;
+    }
+    v->p = u->p;
+}
+
+void RedBlack_delete(RedBlack* T, Node* z) {
+    Node* y = z, *x;
+    int y_original_color = y->color;
+    if (z->left == T->nil) {
+        x = z->right;
+        RedBlack_transplant(T, z, z->right);
+    } else if (z->right == T->nil) {
+        x = z->left;
+        RedBlack_transplant(T, z, z->left);
+    } else {
+        y = RedBlack_min(T, z->right);
+        y_original_color = y->color;
+        x = y->right;
+        if (y->p != z) {
+            RedBlack_transplant(T, y, y->right);
+            y->right = z->right;
+            y->right->p = y;
+        }
+        RedBlack_transplant(T, z, y);
+        y->left = z->left;
+        y->left->p = y;
+        y->color = z->color;
+    }
+
+    if (y_original_color == 0)
+        RedBlack_delete_FixUp(T, x);
+}
+
+void RedBlack_delete_FixUp(RedBlack* T, Node* x) {
+    Node* w;
+    while (x != T->root && x->color == 0) {
+        if (x == x->p->left) {
+            w = x->p->right;
+
+            if (w->color == 1) {
+                w->color = 0;
+                x->p->color = 1;
+                left_rotate(T, x->p);
+                w = x->p->right;
+            }
+
+            if (w->left->color == 0 && w->right->color == 0) {
+                w->color = 1;
+                x = x->p;
+            } else {
+                if (w->right->color == 0) {
+                    w->left->color = 0;
+                    w->color = 1;
+                    right_rotate(T, w);
+                    w = x->p->right;
+                }
+                w->color = x->p->color;
+                x->p->color = 0;
+                w->right->color = 0;
+                left_rotate(T, x->p);
+                x = T->root;
+            }
+        } else {
+            w = x->p->left;
+
+            if (w->color == 1) {
+                w->color = 0;
+                x->p->color = 1;
+                right_rotate(T, x->p);
+                w = x->p->left;
+            }
+
+            if (w->left->color == 0 && w->right->color == 0) {
+                w->color = 1;
+                x = x->p;
+            } else {
+                if (w->left->color == 0) {
+                    w->right->color = 0;
+                    w->color = 1;
+                    left_rotate(T, w);
+                    w = x->p->left;
+                }
+                w->color = x->p->color;
+                x->p->color = 0;
+                w->left->color = 0;
+                right_rotate(T, x->p);
+                x = T->root;
+            }
+        }
+    }
+    x->color = 0;
+}
