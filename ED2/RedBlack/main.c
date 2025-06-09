@@ -20,11 +20,13 @@ int main() {
         return 1;
     }
 
-    int V[10] = {28, 30, 1, 5, 13, 8, 25, 12, 6, 2};
+    int V[6] = {41, 38, 21, 12, 19, 8};
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 6; i++) {
         RedBlack_insert(T, V[i]);
     }
 
     print_Tree(T);
+
+    printf("Altura da arvore: %d\n", RedBlack_height_start(T));
 }
