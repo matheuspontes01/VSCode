@@ -27,5 +27,9 @@ void RedBlack_pre(RedBlack*, Node*);
 void RedBlack_in(RedBlack*, Node*);
 int RedBlack_Height(RedBlack*, Node*);
 int RedBlack_height_start(RedBlack*);
+Node* RedBlack_min(RedBlack*, Node*);
+void RedBlack_transplant(RedBlack*, Node*, Node*);
+void RedBlack_delete(RedBlack*, Node*);
+void RedBlack_delete_FixUp(RedBlack*, Node*);
 
 #endif

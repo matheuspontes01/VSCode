@@ -29,4 +29,11 @@ int main() {
     print_Tree(T);
 
     printf("Altura da arvore: %d\n", RedBlack_height_start(T));
+
+    printf("Removendo o minimo da arvore: \n");
+    Node* min = RedBlack_min(T, T->root);
+
+    RedBlack_delete(T, min);
+
+    print_Tree(T);
 }
